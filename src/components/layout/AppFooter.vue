@@ -62,11 +62,7 @@ const year = 2026
           <em>StarCraft II</em> and its assets are © Blizzard Entertainment. Original mod code and
           documentation © {{ year }} Taylor Incorvia.
         </p>
-        <p class="ftr__note">
-          Unit and upgrade data on this site is transcribed by hand from the mod repository’s audit
-          documents and may lag the live build.
-          <span class="ftr__stamp">Build {{ BUILD_STAMP }}</span>
-        </p>
+        <p class="ftr__stamp">Build {{ BUILD_STAMP }}</p>
       </div>
     </div>
   </footer>
@@ -138,13 +134,8 @@ const year = 2026
   font-weight: var(--fw-semibold);
 }
 
-.ftr__note {
-  font-size: var(--fs-xs);
-}
-
+/* Spacing comes from .ftr__legal's flex gap, not a margin of its own. */
 .ftr__stamp {
-  display: block;
-  margin-top: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--fs-2xs);
   letter-spacing: var(--ls-wide);
