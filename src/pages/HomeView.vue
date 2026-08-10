@@ -17,8 +17,12 @@ useMeta({
 /**
  * What changes for the player, rather than the design tenets. The tenets
  * (memorization wall / stale meta / per-unit balance) argue why the design is
- * good and still lead /why-its-different; these three say what a game feels
- * like, which is what someone deciding whether to try it actually needs.
+ * good and still lead /why-its-different; these say what a game feels like,
+ * which is what someone deciding whether to try it actually needs.
+ *
+ * Strictly what CHANGES. "You still macro like standard StarCraft" was a third
+ * card here and did not belong: it names what stays the same. It now closes the
+ * Curated section, which is the reassurance beat.
  */
 const CHANGES = [
   {
@@ -28,10 +32,6 @@ const CHANGES = [
   {
     title: 'No matchup autopilot',
     body: 'You are not playing TvZ for the thousandth time. Both factions are new, so you have to read what is actually in front of you.',
-  },
-  {
-    title: 'Macro like standard StarCraft',
-    body: 'Same economy, same buildings, same controls. Every mechanic you already have still decides the game.',
   },
 ]
 </script>
@@ -125,7 +125,7 @@ const CHANGES = [
   <PageSection
     eyebrow="Variety inside constraints"
     title="Curated, not chaos"
-    lede="The randomization is rigged for fairness to prevent both useless rolls and oppressive rolls. You get unfamiliar armies that are still meant to be understood, optimized and played competitively."
+    lede="The randomization is rigged for fairness to prevent both useless rolls and oppressive rolls. Your faction is the only thing that changes: same economy, same buildings, same controls. You macro exactly the way you already do, with an army you have never had before."
   >
     <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
   </PageSection>
