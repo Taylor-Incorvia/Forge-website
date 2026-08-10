@@ -22,7 +22,7 @@ function changeCount(sections: { items: string[] }[]) {
   <PageHero
     eyebrow="Development"
     title="Patch notes"
-    lede="Season 1 is actively developed. Every balance pass, new upgrade and drafting change, newest first."
+    lede="Every balance pass, new upgrade and drafting change, newest first."
   />
 
   <div class="container container--text">
