@@ -1,0 +1,410 @@
+# TODO
+
+Picking this back up after the trip. Written 2026-08-06 at rev 61, amended through **rev 67**.
+
+Current state: 46 routes prerender, typecheck clean, **nothing committed yet**, nothing deployed.
+Local preview lives at `:4173` behind a Cloudflare quick tunnel (see README). Those two detached
+processes will be long dead by the time you read this; rerun `scripts/serve-public.ps1`.
+
+---
+
+## 0. Read this first
+
+**Nothing is committed.** `git init` has run, the branch is `main`, and there are **no commits at
+all** — 62 changed or untracked paths sit in the working tree, inside a OneDrive folder. Every
+change described below exists only as loose files. Commit before doing anything else.
+
+### What changed after this doc was first written (rev 61 → 67)
+
+Homepage only. All done on a phone, so **eyeball these on a real screen before trusting them**:
+
+- **Fact strip deleted.** The three-stat band under the hero (37 units / 9.12 trillion / 40
+  upgrades) is gone, along with its CSS and the `FACTION_COMBINATIONS_SHORT` export. Exactly one
+  number remains on the page. The hero's `padding-block` went symmetric because the strip had been
+  supplying its bottom space — that spacing is worth a look.
+- **"Roll a new faction" moved above the grid and is now primary.** The locked-slots note stayed
+  below. This is the one change most likely to need a spacing tweak in the browser.
+- **Explanatory copy moved below the roller**, wrapped in `.roller-notes`. "Below is a real draw"
+  became "That is a real draw" to match.
+- **Randomness ambiguity fixed** across the homepage, How to Play and the meta description: the
+  copy now says the *menu* is randomized, not the outcome of each build. Play-card titles are now
+  "Production buildings decide what you can build" / "…what you can research".
+- **"Curated, not chaos"** added above the roller notes. See §2f-note.
+- **`UNIT_COMBINATIONS` is now unrendered** but deliberately kept in `site.ts` as the working
+  behind the big number. Delete it only if you are willing to lose the derivation.
+
+### Still open from that round
+
+- **Roller vs. video in the hero.** The hero media slot holds `hero-battle.mp4`; the roller sits in
+  section two. They compete for the same real estate and you cannot promote both. My call is roller
+  in the hero, video below — it is interactive, it is uniquely yours, and it works before any
+  footage exists. This interacts with the reshoot item in §4.
+- **Section rhythm.** Five two-word eyebrows in the same register (`The approach`, `How it plays`,
+  `Getting in`, `Latest changes`, `Getting a game`). Nothing on the page is allowed to be big or
+  tiny. Covered in §2g, but it is a layout problem more than a copy problem.
+- **"Possible rolls" is looser than the constant it prints.** `FACTION_COMBINATIONS` counts
+  *legal* factions after roll caps and the same-slot collision rule; the mod can also emit
+  cap-violating draws via the fallback. See the doc comment in `site.ts` before defending the
+  number in public.
+
+### Read these four files first
+
+Most of this codebase is workmanlike Vue that will teach you nothing. Four files are worth actually
+reading, and three are where Vue diverges from React in ways that matter — which is the relevant
+axis, since React is the frontend you use daily.
+
+1. **`src/components/game/FactionRoller.vue`** — the `mulberry32` seeded PRNG. Same problem class
+   as a React hydration mismatch: the prerendered HTML and the client's first render must produce
+   an identical draw, so the seed is fixed and only `reroll()` advances it. Read this one for the
+   SSR reasoning if you read nothing else. It also enforces the mod's real legality rules (cap
+   families, same-slot collisions, over-cap fallback), verified across 5,000 simulated draws.
+2. **`src/components/layout/PageSection.vue`** — exposes `lede` as *both* a prop and a `#head`
+   slot, which is Vue's answer to React's "string vs. `ReactNode`" API question. Also `useId()`
+   feeding `aria-labelledby`, the Vue 3.5 SSR-safe ID story. That is the exact line that broke when
+   a spelling sweep turned it into `aria-labeledby` and typecheck sailed straight past, because TS
+   does not validate ARIA attribute *names*. Worth knowing that hole exists.
+3. **`src/components/ui/AppButton.vue`** — trivial, but it shows `withDefaults(defineProps<{…}>())`
+   ergonomics against React default params. It is also why dropping `variant="secondary"` was the
+   right edit rather than writing `variant="primary"`.
+4. **`vite.config.ts`** — nothing to do with Vue, but `dirStyle: 'flat'` and
+   `beasties pruneSource: false` are the two decisions that were expensive to learn and cheap to
+   undo by accident. The comments explain both.
+
+---
+
+## 1. Blockers before it can go live
+
+- [ ] **First commit and push.** `git init` is done and ~57 files are staged, but nothing has ever
+      been committed. Create the GitHub repo, push `main`.
+- [ ] **GitHub Pages setup.** Settings → Pages → Source: GitHub Actions. The workflow at
+      `.github/workflows/deploy.yml` already typechecks, builds and publishes `dist/`.
+- [ ] **DNS for wildcardarena.com.** Four A records to GitHub's IPs plus a `www` CNAME. The exact
+      table is in README under Deployment. `public/CNAME` already holds the domain. Turn on
+      **Enforce HTTPS** once the cert issues.
+- [ ] **`og:image`.** There is none. Every link pasted into Discord or Reddit renders as a bare
+      text card, which for a mod that spreads by word of mouth is the worst place to be cheap.
+      One 1200x630 PNG in `public/` plus the meta tag in `useMeta.ts`.
+- [ ] **Two blank upgrade descriptions:** Adrenal Glands and Metabolic Boost in `upgrades.ts`.
+      Both are flagged `VERIFY IN-GAME` in the audit. Load a game and read the tooltips.
+
+---
+
+## 2. The de-AI pass
+
+Em dashes are already done (rev 61). 61 removed from written copy; the 44 that remain are the ones
+you exempted: 36 in `patches.ts` (your own release notes) and 7 stat comparisons in `units.ts`
+("Costs 25 gas — 50/0 on ladder"). If you ever want those too, the pattern is the same.
+
+Ordered by how loud each one is. Decide each, do not just accept the list.
+
+### 2a. Write it in first person
+
+**The recommendation: yes, first person.** There is currently not one `I` on the site.
+
+The "pretend to be a team" option is the weaker play on both of your goals. To players, a solo dev
+with a strong opinion about why RTS converges on scripted builds is *more* interesting than an
+anonymous project, not less. To an employer reading it as portfolio work, "I built this" is the
+whole point, and a fake plural undercuts it the moment they check the GitHub account.
+
+The AI-tooling worry is a non-issue in 2026 and is anyway invisible in the output. What is visible
+is that nobody's voice is in the copy.
+
+The place to start is `WhyDifferentView.vue`. It is the most argued page and the most obviously
+ghost-written. Rewriting the lede and the three tenets in your own voice kills several other items
+on this list for free, because "I gave up player agency on purpose" does not need the word
+*intentionally*.
+
+**Do not rewrite the whole site by hand.** Writing it yourself is slower, and most of the site does
+not need a voice: unit pages, upgrade tables and how-to-play steps should stay flat and factual,
+because that is what reference copy is supposed to sound like. The voice only has to show up where
+you are making an argument or telling someone why you built this.
+
+That is roughly four passages:
+
+1. `WhyDifferentView` lede and the three tenets
+2. The homepage hero and the same three tenets there (see the duplication table below; fix that
+   first and this becomes one edit instead of two)
+3. The one-line intro above the faction preview on the homepage
+4. `CommunityView`, which is the most natural place for a first-person line
+
+Write those four cold, in your own words, and let the rest stay neutral.
+
+### 2b. Stop asserting intent (7 uses)
+
+`deliberately` / `intentionally` / `on purpose` / `by design`. Worst offenders are both *headings*:
+
+- `Intentionally clashes with standard RTS design` — HomeView.vue:129 and WhyDifferentView.vue:38
+- "The upgrade pools are intentionally curated" — UpgradesView.vue:80
+- "intentionally not how Reactors work on ladder" — HomeView.vue:170
+
+You built the thing. The intent is implied. Mostly this is fixed by deleting the adverb.
+
+### 2c. The "X, not Y" antithesis (7 uses, two as headings)
+
+`Per-unit balance, not per-matchup balance` is a section title on **both** Home and Why It's
+Different. Also "not from having memorized build orders", "a melee mod, not an Arcade map",
+"Built directly from the Factory, not by merging two Templar."
+
+One of these is a good sentence. Seven is a fingerprint. Keep the one that earns it, rewrite the
+rest as plain statements.
+
+### 2d. Rule of three: leave it alone, mostly
+
+Agreed, it is taught for a reason. Only worth touching where the third item is filler:
+
+- "same economy, same buildings, same controls" — earns it, keep
+- "no separate download, no launcher and no client patch" — the last two are the same fact
+- "depth without a memorization wall, a meta that cannot go stale, and per-unit balance instead of
+  per-matchup balance" — WhyDifferentView meta description, three abstractions in one breath
+
+### 2e. Contractions: pick one and be consistent
+
+Currently 9 contractions against 23 uncontracted forms, sometimes in adjacent sentences
+("It's a melee mod" three lines from "it is fog-gated"). 10 uses of `cannot`. For a game site,
+go contractions everywhere. Uniformly formal reads synthetic; mixed reads machine-edited.
+
+### 2f. Rename "the roller"
+
+You do not like the word and you are right that it is vague. Decide the name first, then rename
+once, because it is currently spread across copy, a component name and a CSS block.
+
+The surface area is small. **Only two places a visitor ever reads it:**
+
+- `HomeView.vue:32` — the big stat label, "distinct factions the roller can legally deal"
+- `UpgradesView.vue:100` — "**The roller limits repeats.**"
+
+Everything else is internal and can be renamed at leisure: the `FactionRoller.vue` component, the
+`.roller__*` CSS block inside it, `.roller-scale` on the homepage, and four code comments.
+
+One thing to weigh: **`patches.ts:131` uses "the roller" in your own release notes** ("The roller is
+also smarter about tight units"). That line is your words and is excluded from edits, so whatever
+you land on will disagree with the archived patch notes unless you decide otherwise. Not a problem,
+just a thing to notice.
+
+Directions worth considering rather than a single suggestion, since this is a naming call:
+
+- **The draft** — already used elsewhere in the copy ("the draft keeps variety in every game"),
+  borrows a concept every competitive player already understands, and gives you a verb ("what you
+  drafted"). Downside: implies choosing, and you do not choose.
+- **The deal / your hand** — matches the card metaphor the site already leans on ("the hand you
+  were dealt", "Wildcard" in the name itself). Gives you "what you were dealt". Strongest fit with
+  the existing voice.
+- **Faction generation / the generator** — accurate, boring, unambiguous.
+- Just naming the output instead of the machine: rephrase so you never need a noun for the system.
+  The homepage already does this since rev 67 ("There are 9,121,034,239,598 possible rolls").
+  Verified against the built HTML: `UpgradesView.vue:100` is now the **only** remaining "roller" a
+  visitor can read outside the patch notes. So this rename is one string, not a project.
+
+The last option is probably the cheapest, and both visitor-facing strings rewrite cleanly that way.
+
+### 2f-note. "Curated, not chaos" is itself an antithesis
+
+It now leads the faction-preview section on the homepage, as asked. Flagging only because it is
+exactly the §2c pattern, so it should be a deliberate keeper rather than an oversight. It is
+arguably the one that earns it, since the whole job of the line is to correct a wrong assumption,
+and that is what the construction is *for*. If you decide otherwise, alternatives that keep the
+meaning without the shape:
+
+- "Random, but hand-built." / "Random inside guardrails."
+- "Every pool is hand-built for the unit it belongs to." (just delete the lead-in; the sentence
+  after it already carries the point)
+
+### 2g. Smaller tics
+
+- **Every fact gets a "so"/"because" tail.** "It is fog-gated, so you have to actually send a
+  scout." The reflex to explain the consequence of each sentence. Cut about half.
+- **`actually` / `simply` as hedges** — 4 uses, all deletable.
+- **Semicolons in prose** — 2 (HomeView.vue:112, HowToPlayView.vue:62). Rare in game writing.
+- **Uniform block lengths.** The three tenets on Home are all within a few words of each other.
+  Human writing is lumpy. Let one be a single line.
+- **`Macro like normal StarCraft. Adapt like you never have.`** — balanced two-sentence heading
+  with parallel imperatives. Recognizable shape.
+
+---
+
+## 3. Refactors
+
+### Tailwind
+
+> **Do this after the homepage structure is settled, not before.** The refactor is *gated* on the
+> roller-vs-video decision in §0, not independent of it. Restyling the roller section before
+> deciding whether the roller moves into the hero means doing that work twice. Settle the layout,
+> then migrate. This matches your own sequencing instinct — vision first, then scrutinize the code.
+
+Currently the design system is CSS custom properties in `src/styles/tokens.css` plus per-component
+scoped `<style>` blocks.
+
+**One thing to know coming from React.** A large part of Tailwind's value there is scoping and
+collision avoidance — no scoped styles, class names are global, CSS-in-JS costs something. Vue's
+`<style scoped>` already solves that; it is why the built markup carries `data-v-*` attributes.
+So the case for Tailwind *here* is velocity and not having to name things, not isolation. That is
+still a real case, but it changes which parts of the migration are wins and which are lateral
+moves. Expect the `tokens.css` → `@theme` step to be clean and the per-component `<style scoped>`
+teardown to be the actual work.
+
+Tailwind v4 (4.3.3 as of writing) is the version to go to. It reads its theme from CSS rather than
+a JS config, so `tokens.css` largely survives the move: the custom properties become the
+`@theme` block and the token names stay stable. Install `@tailwindcss/vite` rather than the
+PostCSS path.
+
+Two things that must not regress:
+
+1. **The cyan accent stays interaction-only** — links, primary buttons, focus rings, active states.
+   Never a large fill, never a gradient. That restraint is most of what keeps this from reading as
+   a generic tech template.
+2. **Race colors are data, not brand.** Terran is deliberately desaturated so it never competes
+   with the accent.
+
+### Duplication (the part you actually care about)
+
+Confirmed duplicates, all copy that got aligned across two pages by hand:
+
+| Duplicated | Locations |
+| --- | --- |
+| `Intentionally clashes with standard RTS design` heading + full lede | `HomeView.vue:129-130`, `WhyDifferentView.vue:38-39` |
+| `Per-unit balance, not per-matchup balance` tenet | `HomeView.vue:48`, `WhyDifferentView.vue:29` |
+| The other two tenets (memorization wall, stale meta) | same two files |
+| "melee mod, not an Arcade map / loads with the lobby" pitch | `HomeView.vue:76`, `HowToPlayView.vue:71` |
+| Add-on explanation ("unlocks the top slot, does not double production") | `HomeView.vue:169`, `FactionRoller.vue:197` |
+| Discord CTA block | `HomeView.vue`, `CommunityView.vue` |
+| `allowedHosts` array | `vite.config.ts` `server` and `preview`, verbatim |
+
+The tenets are the real problem: they exist in two files and you already had me sync their order
+and framing by hand once. Lift them into `src/data/` as a single exported array and render both
+pages from it. Same for the pitch paragraph.
+
+### Vite 8
+
+No technical reason it is on 7 other than that I scaffolded it on what I knew. Vite 8.2.1 is
+current, and the two things that could have blocked it do not:
+
+- `vite-ssg@28.3.0` peer range already includes `^8.0.0-0`
+- `@vitejs/plugin-vue@6.0.8` peer range already includes `^8.0.0`
+
+So it should be a version bump plus a build. Do it on its own commit so a prerender regression is
+easy to bisect. Also on the table while you are in there: `vue@3.5.41`, `@vitejs/plugin-vue@6.0.8`.
+
+### Other
+
+- `dist/` accumulates stale hashed assets locally because of `WA_KEEP_DIST`. Harmless (CI builds
+  clean) but run `rebuild.ps1 -Restart` occasionally.
+- Consider moving the repo out of OneDrive. The `EPERM ... prepare-out-dir` build failures are
+  OneDrive holding a lock on `dist/`.
+
+---
+
+## 4. Content and media
+
+### Homepage video (recapture)
+
+- [ ] **Reshoot the fight.** The existing footage in `C:\Users\taylo\Videos\StarCraft II` is not a
+      good enough shot. Same clip is fine, just load the replay again and get a better camera on
+      the same fight. A montage of two or three fights is equally fine and probably reads better,
+      since it shows more than one rolled faction.
+
+      What to aim for, given it will sit on the homepage:
+      - Legible at small size and on a phone. Wide shots of a whole base will not survive.
+      - Something visibly *not stock*, so the value proposition lands without a caption. A
+        Battlecruiser doing something a Battlecruiser does not do beats a clean engagement.
+      - Short. 6 to 12 seconds, and it needs to loop without an obvious seam.
+      - It will be muted and autoplaying, so nothing can depend on sound.
+
+- [ ] **Wire it up.** Drop it in `public/media/` and set `src` on the `MediaFrame`. Encode as MP4
+      (h.264) plus a WebM if convenient, add a `poster` frame so there is no flash of empty box
+      before it loads, and keep it under a couple of MB. `MediaFrame` already reserves the aspect
+      ratio, so there is no layout shift and no CSS to touch.
+
+### Stills
+
+- [ ] **"Your Faction" panel snapshot.** You said you would grab this. It is the highest-value
+      still on the site by a distance: the single clearest proof that this is a real mod and not a
+      landing page. Homepage, above the fold-ish.
+- [ ] **The other five `MediaFrame` placeholders.** Each one renders a labelled placeholder
+      describing the shot that belongs there, so the frames themselves tell you what to capture.
+- [ ] **Unit portraits.** Set `image` on units in `units.ts` (files in `public/units/`) and the
+      race-tinted monogram is replaced. Grid layout is unaffected either way, so this can be done
+      a few units at a time rather than all 37 at once.
+
+### Logo / emblem
+
+Low priority, and the current brand mark is fine. `BrandMark.vue` is a rotated square split by a
+vertical accent line, meant to read as a dealt card at small size. Inline SVG, so it costs no
+request and inherits `currentColor` and `--c-accent` from the tokens. **When a real logo exists,
+replace only that one component** — nothing else references the glyph.
+
+Worth revisiting only for one reason: it is also what a proper `og:image` and a favicon would be
+built from, and both of those are on the blocker list. If you do commission or draw something,
+do it before the `og:image`, not after, so you only make that asset once.
+
+### An "about" section
+
+Worth doing, and it solves a problem rather than just adding a page: it gives the first-person
+voice somewhere it unambiguously belongs, which takes pressure off §2a. The other pages can stay
+mostly neutral if there is one place that is openly you.
+
+**Frame it as "why I built this", not "who I am."** That is the version that serves both audiences
+at once. A player gets context for why the design opinions on Why It's Different are worth taking
+seriously. An employer gets scope judgment, a real decision under constraint, and evidence you
+finish things. A résumé block on a game site reads as self-promotion and helps neither.
+
+Material that is already true and worth using:
+
+- Solo project.
+- It was going to be **Forge RTS**, built around a forge/crafting system. You cut that scope and
+  the rename was forced by the cut. That is the single best thing you have here: a concrete
+  decision to ship less, and it is the kind of thing people claim and rarely evidence.
+- The north star: skill should come from reading and adapting, not from memorizing build orders
+  before your decisions start to matter.
+- You are a professional software engineer, and the site itself is the artifact.
+
+Keep it to one screen. A thin about page is worse than none.
+
+**Decision to make first: does anything link out?** Right now nothing does, on purpose, because
+you said the GitHub is public mainly to look active when job-searching. An about section reopens
+that, and specifically for the *site* repo rather than the mod repo, since the site is the thing
+an employer would want to read the code of. Three defensible answers:
+
+1. Nothing links out. Consistent with what you decided, keeps the page purely about the mod.
+2. Link the **site** repo only, not the mod. The mod repo stays unlinked as decided.
+3. Link a personal site or LinkedIn instead, so the mod repo stays out of it entirely.
+
+Pick one before writing the copy — it changes the ending of the section.
+
+**Placement, in rough order of preference:**
+
+- **A block at the bottom of `/community`.** Cheapest, no new route, no nav item, and Community is
+  already the page where a person is expected to show up. Downside: no URL to send anyone.
+- **A real `/about` route.** Better for the portfolio goal because it is linkable, and it will sit
+  in the sitemap and get its own `<title>`. Worth it only if there is enough to say.
+- Footer only. Too small to be worth writing.
+
+If you go with a route, the mechanical checklist is short:
+
+- `src/router/routes.ts` — add the record (lazy import, matching the others)
+- `vite.config.ts` — add `/about` to `STATIC_ROUTES`, which feeds both the prerender list and the
+  sitemap, so nothing else needs touching
+- `src/components/layout/AppHeader.vue:8` — the `NAV` array, if it belongs in the primary nav.
+  It probably does not; six items is already a full bar and About is not a task a player came to
+  do. The footer is the better home for the link.
+- `useMeta` call in the page, same shape as every other view
+
+### Loose copy ends
+
+- `WhyDifferentView` lost its "How to play" CTA during the edits. It currently dead-ends.
+- Homepage bullet "The roller limits repeats..." is 26 words with the rationale in the second half.
+- Three remaining "Data notes" describe stock behavior and could go the way of the others:
+  Diamondback "Fires while moving", Viking "Assault Mode transforms it", DuskWing "A
+  Banshee-derived mercenary variant".
+
+---
+
+## Rules that still hold
+
+- The mod repo at `...\Forge` is **read-only**. Never edit it from here.
+- Never invent mechanics, units, upgrades or balance numbers. Leave a `TODO` on the unit instead.
+- No automated sync, scraping, APIs or build-time pipelines. Data is transcribed by hand, and the
+  reconciliation decisions are recorded in the `units.ts` header comment.
+- The mod's GitHub repo is **not** linked from the site.
+- Numbers in the data are catalog values. `formatBuildTime` / `formatPeriod` / `formatDps` convert
+  to Faster before display. Do not render raw catalog values.
+- StarCraft II is © Blizzard. Do not redistribute Blizzard assets.
