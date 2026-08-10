@@ -398,6 +398,95 @@ If you go with a route, the mechanical checklist is short:
 
 ---
 
+## 5. Homepage information hierarchy
+
+The homepage's failure is not bad copy, it is **flat priority** — every section is equally
+important, so nothing is. Fixing that settles most of §2 for free.
+
+**North star, in your own words:** *"I wanted the decisions you make to matter more than how many
+times you have grinded a specific opener."* Everything on the page is either evidence for that
+sentence or it belongs a level deeper.
+
+### The test for any homepage section
+
+Does this help someone understand **what it is**, **why it makes interesting competitive
+StarCraft**, or **how to start playing**? If not, it lives on another page. That is the whole rule.
+
+### Use your own dictation as the source copy
+
+The single best thing to come out of the planning was that you produced better copy by talking
+than the site has by writing. Do not polish these. Paste them.
+
+- *"I wanted to see what the game would look like outside of the lens of the three matchups in
+  StarCraft 2."*
+- *"I wanted the decisions you make to matter more than how many times you have grinded a specific
+  opener."*
+- *"curated and designed for competitive rather than just some nonsense chaos"*
+
+Compare the current tenet — "Skill comes from reading and adapting to your roll, not from having
+memorized build orders and matchup dynamics before your first competitive game." Same idea, sanded
+until nobody is in it. **This is the §2a fix.** You do not have to learn to write in your voice;
+you have to stop letting it get translated out.
+
+### Target structure
+
+| # | Section | Job | Change |
+| --- | --- | --- | --- |
+| 1 | Hero | What is this? | **Rewrite the lede** |
+| 2 | The hand you're dealt (roller) | Show, don't tell | Keep, promote |
+| 3 | Curated, not chaos | It isn't Arcade nonsense | **Promote to its own section** |
+| 4 | What changes about playing | The thesis | Rewrite tenets in first person |
+| 5 | Getting in | Five clicks | Keep as-is |
+| 6 | Latest changes | Proof it isn't abandoned | Keep, keep it small |
+| 7 | Getting a game | Discord | Keep as-is |
+| — | How it plays (4 cards) | Manual content | **Move to `/how-to-play`** |
+
+### 1. The hero needs a definition, and currently has none
+
+The eyebrow says "StarCraft II melee mod," the headline is emotional, and the lede opens on
+*mechanism*: "your production buildings are dealt a random roster of units they can build." No
+sentence anywhere completes **"Wildcard Arena is a ___."** Someone arriving cold has to
+reverse-engineer the concept.
+
+That happened for a traceable reason: the lede reads like mechanism because it *is* the fix you
+asked for, to stop people thinking each build click produces a random unit. Right instinct, wrong
+altitude. **Move the menu-vs-outcome disambiguation down to §2**, where a reader is looking at
+actual slots, and give the hero a definition instead. Something in the shape of:
+
+> Wildcard Arena is a StarCraft II melee mod where every game deals you a procedurally generated
+> faction, built from units and upgrades across all three races.
+
+"Procedurally generated" earns its place: it does double duty, telling a player this is systematic
+rather than arbitrary, and telling a recruiter you built a system.
+
+### 2–3. Roller, then the constraint story
+
+Claim, then proof, then reassurance. **The roller stays in section two rather than moving into the
+hero** — it is meaningless before a reader knows what "faction" means here, so proof cannot precede
+claim. (This reverses my earlier advice; the sequencing argument is better than the one I gave.)
+
+Then promote **"Curated, not chaos"** out of the roller footnote into a real section, with two or
+three concrete constraint examples and a link out for the rules. Currently it is one bold lead-in
+buried under the grid, doing the heaviest lifting on the page from the smallest slot.
+
+### 4. Rewrite the tenets first-person
+
+Same three ideas, but as the thesis in your voice, not an argued position in nobody's. This is
+where "outside the lens of the three matchups" belongs.
+
+### Open questions this does not settle
+
+- **Where the hero video goes.** Once the roller is not competing for the hero, the video can stay
+  where it is or move down. No longer a blocking decision.
+- **Where "faction generation rules" lives.** There is no such page. Routes are `/`,
+  `/how-to-play`, `/why-its-different`, `/units`, `/upgrades`, `/patch-notes`, `/community`.
+  `/upgrades` already covers pools, caps and repeat-limiting, so the cheapest answer is a section
+  heading and an anchor there rather than a new route.
+- **Section rhythm** (§0) is unsolved by this and still wants a layout pass: five two-word eyebrows
+  in the same register, nothing allowed to be big or small.
+
+---
+
 ## Rules that still hold
 
 - The mod repo at `...\Forge` is **read-only**. Never edit it from here.
