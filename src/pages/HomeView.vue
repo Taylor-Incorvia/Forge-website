@@ -41,14 +41,14 @@ const CHANGES = [
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="eyebrow">StarCraft II melee mod · {{ SITE.season }}, actively developed</p>
+        <p class="eyebrow">StarCraft II multiplayer mod · {{ SITE.season }}, actively developed</p>
         <h1 class="hero__title">
           You don’t pick your race.<br />
           <span class="hero__title-alt">You’re dealt one.</span>
         </h1>
         <p class="lede hero__lede">
-          Wildcard Arena is a StarCraft II melee mod where every game deals you a procedurally
-          generated faction, built from units and upgrades across all three races.
+          Wildcard Arena is a mod for standard StarCraft II multiplayer, where every game deals you
+          a procedurally generated faction built from units and upgrades across all three races.
         </p>
         <!--
           Two CTAs only: start playing, or go find someone to play against.
@@ -66,9 +66,15 @@ const CHANGES = [
             Join the Discord
           </AppButton>
         </div>
+        <!--
+          "Melee mod" is kept, but demoted to here: it is the word you need in
+          the lobby, not the word that explains what this is. The lede defines
+          the thing in language that needs no glossary; this teaches the term
+          next to the instruction where it becomes useful.
+        -->
         <p class="hero__small">
-          Wildcard Arena is a melee mod, not an Arcade map. StarCraft II multiplayer is free and it
-          loads with the lobby. Nothing to buy, nothing to download.
+          It loads with the lobby as a melee mod, not an Arcade map. StarCraft II multiplayer is
+          free. Nothing to buy, nothing to download.
         </p>
       </div>
 
