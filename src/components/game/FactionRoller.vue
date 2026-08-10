@@ -167,10 +167,17 @@ function reroll() {
               </RouterLink>
               <UpgradeBadge v-if="slot.upgradeId" :id="slot.upgradeId" :link="false" />
             </span>
+            <!--
+              The prose explaining locked slots now lives on /how-to-play, so the
+              badge has to carry its own meaning. `title` is a hover tooltip and
+              fires on neither touch nor most screen readers; aria-label is what
+              actually names it.
+            -->
             <span
               v-if="slot.addonGated"
               class="slot__gate"
               :title="`Needs a ${FACILITY_ADDON[facility]}`"
+              :aria-label="`Locked. Needs a ${FACILITY_ADDON[facility]}`"
             >
               <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" width="12" height="12">
                 <rect
@@ -196,11 +203,6 @@ function reroll() {
         </ol>
       </section>
     </div>
-
-    <p class="roller__note">
-      Locked slots need their add-on attached before they can produce. An add-on unlocks a
-      building’s top slot rather than doubling production.
-    </p>
   </div>
 </template>
 
@@ -315,15 +317,6 @@ function reroll() {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3) var(--space-5);
-}
-
-/* Below the grid, so it reads as a footnote on the slots rather than a caption
-   on the button it used to sit beside. */
-.roller__note {
-  max-width: 70ch;
-  font-size: var(--fs-sm);
-  color: var(--c-text-muted);
-  line-height: var(--lh-normal);
 }
 
 @media (min-width: 52rem) {
