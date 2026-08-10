@@ -35,22 +35,6 @@ const CHANGES = [
     body: 'This is not random-button StarCraft. Mechanics, scouting, positioning, economy and decision-making still decide games. You are applying those skills to unfamiliar situations.',
   },
 ]
-
-/** Verified against UNIT_POOLS, the roll caps and the 07-27 patch notes. */
-const CONSTRAINTS = [
-  {
-    title: 'Pools are built per unit',
-    body: 'A Tempest cannot roll movement speed. It already outranges everything, so it could kite forever.',
-  },
-  {
-    title: 'Caps limit repeats',
-    body: 'Most upgrades reach at most two of your units. Yamato Cannon, Tactical Jump and every caster spell reach exactly one.',
-  },
-  {
-    title: 'No dead slots',
-    body: 'Units with small pools, like the Archon, Void Ray and Sentry, will not get stranded with an empty slot.',
-  },
-]
 </script>
 
 <template>
@@ -125,17 +109,9 @@ const CONSTRAINTS = [
   <PageSection
     eyebrow="Variety inside constraints"
     title="Curated, not chaos"
-    lede="The generator is not there to produce nonsense. Every unit draws from a pool hand-built for that unit, and roll caps keep any one upgrade off your whole army. You get unfamiliar armies that are still meant to be understood, optimized and played competitively."
+    lede="The randomization is rigged for fairness to prevent both useless rolls and oppressive rolls. You get unfamiliar armies that are still meant to be understood, optimized and played competitively."
   >
-    <div class="tenets">
-      <AppCard v-for="item in CONSTRAINTS" :key="item.title" padding="lg" as="article">
-        <h3 class="tenet__title">{{ item.title }}</h3>
-        <p class="tenet__body">{{ item.body }}</p>
-      </AppCard>
-    </div>
-    <div class="tenets__more">
-      <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
-    </div>
+    <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
   </PageSection>
 
   <!-- ── What changes for the player ────────────────────────── -->
