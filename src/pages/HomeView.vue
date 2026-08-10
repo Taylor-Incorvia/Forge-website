@@ -22,16 +22,16 @@ useMeta({
  */
 const CHANGES = [
   {
-    title: 'No fixed matchups',
-    body: 'You are not playing Terran versus Zerg for the thousandth time. Every game sets up a different strategic relationship, because both factions are new.',
+    title: 'No build orders to memorize',
+    body: 'The opener you have drilled a thousand times does not exist here. You work out what your faction is good at while you are playing it.',
   },
   {
-    title: 'No standard opener to memorize',
-    body: 'You cannot execute the build you have practised five hundred times. You have to work out what makes sense for the faction you were dealt.',
+    title: 'No matchup autopilot',
+    body: 'You are not playing TvZ for the thousandth time. Both factions are new, so you have to read what is actually in front of you.',
   },
   {
-    title: 'Knowledge still matters',
-    body: 'This is not random-button StarCraft. Mechanics, scouting, positioning, economy and decision-making still decide games. You are applying those skills to unfamiliar situations.',
+    title: 'Macro like standard StarCraft',
+    body: 'Same economy, same buildings, same controls. Every mechanic you already have still decides the game.',
   },
 ]
 </script>
@@ -129,7 +129,7 @@ const CHANGES = [
     tone="sunken"
     eyebrow="What changes"
     title="What if StarCraft didn’t have fixed matchups?"
-    lede="Strategy here has been explored through the same three races for more than a decade. Wildcard Arena asks what happens when those boundaries come off."
+    lede="StarCraft II strategy has been thoroughly explored through the lenses of Terran, Protoss and Zerg. Wildcard Arena takes those lenses away."
   >
     <div class="tenets">
       <AppCard v-for="item in CHANGES" :key="item.title" padding="lg" as="article">
