@@ -142,7 +142,6 @@ const FIRST_GAME = [
       <AppButton to="/community" :variant="DISCORD_INVITE_IS_LIVE ? 'secondary' : 'primary'">
         Community and events
       </AppButton>
-      <AppButton to="/units" variant="ghost">Browse the units →</AppButton>
     </div>
   </PageSection>
 </template>
