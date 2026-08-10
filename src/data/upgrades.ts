@@ -34,7 +34,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Movement Speed',
     category: 'mobility',
     cap: 2,
-    description: 'A permanent +50% movement speed.',
+    description: '+50% movement speed.',
   },
   {
     id: 'Charge',
@@ -288,7 +288,8 @@ export const UPGRADES: Upgrade[] = [
     name: 'Disruption Web',
     category: 'caster',
     cap: 1,
-    description: 'Prevents all units in an area from attacking.',
+    // 50 energy: mod's own AbilData.xml, F_CorsairMPDisruptionWeb (stock is 100).
+    description: 'Prevents all units in an area from attacking. 50 energy.',
   },
   {
     id: 'ForceField',
