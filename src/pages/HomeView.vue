@@ -15,19 +15,40 @@ useMeta({
   path: '/',
 })
 
-/** The three tenets, straight from the mod README. */
-const TENETS = [
+/**
+ * What changes for the player, rather than the design tenets. The tenets
+ * (memorization wall / stale meta / per-unit balance) argue why the design is
+ * good and still lead /why-its-different; these three say what a game feels
+ * like, which is what someone deciding whether to try it actually needs.
+ */
+const CHANGES = [
   {
-    title: 'Depth without a memorization wall',
-    body: 'Skill comes from reading and adapting to your roll, not from having memorized build orders and matchup dynamics before your first competitive game.',
+    title: 'No fixed matchups',
+    body: 'You are not playing Terran versus Zerg for the thousandth time. Every game sets up a different strategic relationship, because both factions are new.',
   },
   {
-    title: 'No stale meta',
-    body: 'Three fixed factions converge on a few viable builds, and play can start to feel scripted. A brand new faction every game means you cannot run the same strategy twice.',
+    title: 'No standard opener to memorize',
+    body: 'You cannot execute the build you have practised five hundred times. You have to work out what makes sense for the faction you were dealt.',
   },
   {
-    title: 'Per-unit balance, not per-matchup balance',
-    body: 'A unit that is too strong just gets nerfed. There is no need to keep three matchups simultaneously fair, so balance changes stay small and legible.',
+    title: 'Knowledge still matters',
+    body: 'This is not random-button StarCraft. Mechanics, scouting, positioning, economy and decision-making still decide games. You are applying those skills to unfamiliar situations.',
+  },
+]
+
+/** Verified against UNIT_POOLS, the roll caps and the 07-27 patch notes. */
+const CONSTRAINTS = [
+  {
+    title: 'Pools are built per unit',
+    body: 'A Tempest cannot roll movement speed. It already outranges everything, so it could kite forever.',
+  },
+  {
+    title: 'Caps limit repeats',
+    body: 'Most upgrades reach at most two of your units. Yamato Cannon, Tactical Jump and every caster spell reach exactly one.',
+  },
+  {
+    title: 'No dead slots',
+    body: 'Units with small pools, like the Archon, Void Ray and Sentry, will not get stranded with an empty slot.',
   },
 ]
 </script>
@@ -43,10 +64,8 @@ const TENETS = [
           <span class="hero__title-alt">You’re dealt one.</span>
         </h1>
         <p class="lede hero__lede">
-          Every game, your production buildings are dealt a random roster of units they can build,
-          and your tech buildings a random set of upgrades they can research. No standard build
-          order, no matchup to memorize, no optimal opening to grind. Just the faction you were
-          dealt and the decisions you make with it.
+          Wildcard Arena is a StarCraft II melee mod where every game deals you a procedurally
+          generated faction, built from units and upgrades across all three races.
         </p>
         <div class="hero__cta">
           <AppButton to="/how-to-play" size="lg">How to play</AppButton>
@@ -83,89 +102,57 @@ const TENETS = [
     <FactionRoller />
     <div class="roller-notes">
       <p class="lede">
-        Each slot in a production building holds one unit type you can build all game, and each of
-        those units is dealt one upgrade from a pool filtered to what makes sense on it. That is a
-        real draw, built from the same pools the mod uses and obeying the same roll caps and slot
-        rules.
-      </p>
-      <p class="curation">
-        <strong>Curated, not chaos.</strong> Every pool is hand-built for the unit it belongs to, so
-        a draw can surprise you without being nonsense. Roll caps stop any one upgrade from ending
-        up on your whole army.
+        Each slot holds one unit type you can build all game, and each of those units is dealt one
+        upgrade. The randomness is in the menu: build from a slot and you get that unit, every time.
       </p>
       <p class="roller-scale">
-        There are
+        That is a real draw, obeying the same pools and caps the mod uses. There are
         <strong>{{ FACTION_COMBINATIONS.toLocaleString('en-US') }}</strong> possible rolls.
       </p>
     </div>
+
+    <div class="panel">
+      <MediaFrame
+        label="The “Your Faction” panel"
+        hint="The in-game panel showing every rolled unit with its paired upgrade, grouped by facility. This is the single most useful screenshot for explaining the mod."
+        ratio="4/3"
+        caption="The same thing in game. Your whole faction, one glance away."
+      />
+    </div>
   </PageSection>
 
-  <!-- ── Why it's different ────────────────────────────────── -->
+  <!-- ── Randomness is constrained, not arbitrary ───────────── -->
   <PageSection
-    eyebrow="The approach"
-    title="Intentionally clashes with standard RTS design"
-    lede="Wildcard Arena gives up some player agency and leans into randomness on purpose, the opposite of what competitive RTS usually optimizes for. Here’s why."
+    eyebrow="Variety inside constraints"
+    title="Curated, not chaos"
+    lede="The generator is not there to produce nonsense. Every unit draws from a pool hand-built for that unit, and roll caps keep any one upgrade off your whole army. You get unfamiliar armies that are still meant to be understood, optimized and played competitively."
   >
     <div class="tenets">
-      <AppCard v-for="tenet in TENETS" :key="tenet.title" padding="lg" as="article">
-        <h3 class="tenet__title">{{ tenet.title }}</h3>
-        <p class="tenet__body">{{ tenet.body }}</p>
+      <AppCard v-for="item in CONSTRAINTS" :key="item.title" padding="lg" as="article">
+        <h3 class="tenet__title">{{ item.title }}</h3>
+        <p class="tenet__body">{{ item.body }}</p>
+      </AppCard>
+    </div>
+    <div class="tenets__more">
+      <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
+    </div>
+  </PageSection>
+
+  <!-- ── What changes for the player ────────────────────────── -->
+  <PageSection
+    tone="sunken"
+    eyebrow="What changes"
+    title="What if StarCraft didn’t have fixed matchups?"
+    lede="Strategy here has been explored through the same three races for more than a decade. Wildcard Arena asks what happens when those boundaries come off."
+  >
+    <div class="tenets">
+      <AppCard v-for="item in CHANGES" :key="item.title" padding="lg" as="article">
+        <h3 class="tenet__title">{{ item.title }}</h3>
+        <p class="tenet__body">{{ item.body }}</p>
       </AppCard>
     </div>
     <div class="tenets__more">
       <AppButton to="/why-its-different" variant="ghost">Read the design thesis →</AppButton>
-    </div>
-  </PageSection>
-
-  <!-- ── How it plays ──────────────────────────────────────── -->
-  <PageSection
-    tone="sunken"
-    eyebrow="How it plays"
-    title="Macro like normal StarCraft. Adapt like you never have."
-  >
-    <div class="plays">
-      <div class="plays__list">
-        <article class="play">
-          <h3 class="play__title">Production buildings decide what you can build</h3>
-          <p class="play__body">
-            Barracks, Factory and Starport each fill their slots with random units from across all
-            three races. The randomness is in the menu: build from a slot and you get that unit,
-            every time.
-          </p>
-        </article>
-        <article class="play">
-          <h3 class="play__title">Tech buildings decide what you can research</h3>
-          <p class="play__body">
-            Ghost Academy, Armory and Fusion Core hold one random upgrade for each unit you were
-            dealt, drawn from a pool built for that unit. Researching it is still your call, at the
-            usual cost.
-          </p>
-        </article>
-        <article class="play">
-          <h3 class="play__title">Add-ons gate the top slot</h3>
-          <p class="play__body">
-            An add-on unlocks a building’s highest slot rather than doubling production. This is
-            intentionally not how Reactors work on ladder, and it is the most commonly misread
-            mechanic in the mod.
-          </p>
-        </article>
-        <article class="play">
-          <h3 class="play__title">Scouting tells you their hand</h3>
-          <p class="play__body">
-            Get vision of an enemy building and icons above it show what it can produce or research.
-            It is fog-gated, so you have to actually send a scout.
-          </p>
-        </article>
-      </div>
-
-      <div class="plays__media">
-        <MediaFrame
-          label="The “Your Faction” panel"
-          hint="The in-game panel showing every rolled unit with its paired upgrade, grouped by facility. This is the single most useful screenshot for explaining the mod."
-          ratio="4/3"
-          caption="Your whole faction, one glance away. Added in Wildcard Arena 3.0."
-        />
-      </div>
     </div>
   </PageSection>
 
@@ -318,16 +305,11 @@ const TENETS = [
   max-width: 62rem;
 }
 
-.curation {
-  max-width: 60ch;
-  font-size: var(--fs-md);
-  color: var(--c-text-muted);
-  line-height: var(--lh-relaxed);
-}
-
-.curation strong {
-  color: var(--c-text);
-  font-weight: var(--fw-medium);
+/* The in-game counterpart to the draw above it. Capped so a 4/3 frame does not
+   tower over the roller it is meant to corroborate. */
+.panel {
+  margin-top: var(--space-8);
+  max-width: 34rem;
 }
 
 .roller-scale strong {
@@ -358,39 +340,6 @@ const TENETS = [
 
 .tenets__more {
   margin-top: var(--space-6);
-}
-
-/* ── How it plays ─────────────────────────────────────────── */
-.plays {
-  display: grid;
-  gap: var(--space-10);
-  grid-template-columns: 1fr;
-  align-items: start;
-}
-
-.plays__list {
-  display: flex;
-  flex-direction: column;
-}
-
-.play {
-  padding-block: var(--space-5);
-  border-top: 1px solid var(--c-border);
-}
-
-.play:last-child {
-  border-bottom: 1px solid var(--c-border);
-}
-
-.play__title {
-  font-size: var(--fs-lg);
-  margin-bottom: var(--space-2);
-}
-
-.play__body {
-  max-width: 56ch;
-  color: var(--c-text-secondary);
-  line-height: var(--lh-relaxed);
 }
 
 /* ── Start ────────────────────────────────────────────────── */
@@ -482,10 +431,6 @@ const TENETS = [
   .hero__inner {
     grid-template-columns: 1.05fr 0.95fr;
     gap: var(--space-16);
-  }
-  .plays {
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: var(--space-12);
   }
   .start {
     grid-template-columns: 1fr 1fr;
