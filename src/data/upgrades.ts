@@ -189,8 +189,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Cluster Warheads',
     category: 'combat',
     cap: 2,
-    description:
-      'Adds splash damage to the Dusk Wing’s attack, which otherwise hits a single target.',
+    description: 'Adds splash damage to the Dusk Wing’s attack.',
   },
   {
     id: 'LifestealMarine',
