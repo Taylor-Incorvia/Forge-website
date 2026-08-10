@@ -288,8 +288,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Disruption Web',
     category: 'caster',
     cap: 1,
-    description:
-      'Every ground unit and structure underneath it, friendly and enemy alike, cannot attack. It is area denial, so cast it where the enemy is and keep your own units clear.',
+    description: 'Prevents all units in an area from attacking.',
   },
   {
     id: 'ForceField',
