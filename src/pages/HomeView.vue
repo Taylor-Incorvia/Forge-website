@@ -125,7 +125,7 @@ const CHANGES = [
   <PageSection
     eyebrow="Variety inside constraints"
     title="Curated, not chaos"
-    lede="The randomization is rigged for fairness to prevent both useless rolls and oppressive rolls. The faction is random. Winning is not: macro, micro and reading your opponent still decide every game."
+    lede="The rolls are rigged for fairness to prevent both useless and oppressive ones. The faction is random. Winning is not: macro, micro and reading your opponent still decide every game."
   >
     <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
   </PageSection>
