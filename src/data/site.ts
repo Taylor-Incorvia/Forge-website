@@ -10,6 +10,7 @@ export const SITE = {
   tagline: "You don't pick your race. You're dealt one.",
   description:
     'Wildcard Arena is a StarCraft II melee mod. A random roster decides which units you can build and which upgrades you can research. You win by adapting to the hand you were dealt.',
+  /** Not rendered anywhere right now. Kept for the Season 1 launch. */
   season: 'Season 1',
 } as const
 
@@ -22,7 +23,7 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-10 · rev 86'
+export const BUILD_STAMP = '2026-08-10 · rev 87'
 
 export const LINKS = {
   /**

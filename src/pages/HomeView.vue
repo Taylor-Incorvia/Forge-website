@@ -41,7 +41,7 @@ const CHANGES = [
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="eyebrow">StarCraft II multiplayer mod · {{ SITE.season }}, actively developed</p>
+        <p class="eyebrow">StarCraft II multiplayer mod</p>
         <h1 class="hero__title">
           You don’t pick your race.<br />
           <span class="hero__title-alt">You’re dealt one.</span>
