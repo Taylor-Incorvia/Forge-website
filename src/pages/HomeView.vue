@@ -90,7 +90,8 @@ const CHANGES = [
         upgrade. The randomness is in the menu: build from a slot and you get that unit, every time.
       </p>
       <p class="roller-scale">
-        That is a real draw, obeying the same pools and caps the mod uses. There are
+        That is a real draw, obeying the same pools and caps the mod uses at the beginning of each
+        game. There are
         <strong>{{ FACTION_COMBINATIONS.toLocaleString('en-US') }}</strong> possible rolls.
       </p>
     </div>
