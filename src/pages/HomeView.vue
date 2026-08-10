@@ -4,7 +4,6 @@ import AppCard from '@/components/ui/AppCard.vue'
 import MediaFrame from '@/components/ui/MediaFrame.vue'
 import PageSection from '@/components/layout/PageSection.vue'
 import FactionRoller from '@/components/game/FactionRoller.vue'
-import PatchNoteBody from '@/components/game/PatchNoteBody.vue'
 import { useMeta } from '@/composables/useMeta'
 import { SITE, FACTION_COMBINATIONS, LINKS, DISCORD_INVITE_IS_LIVE } from '@/data/site'
 import { LATEST_PATCH, formatPatchDate } from '@/data/patches'
@@ -51,10 +50,20 @@ const CHANGES = [
           Wildcard Arena is a StarCraft II melee mod where every game deals you a procedurally
           generated faction, built from units and upgrades across all three races.
         </p>
+        <!--
+          Two CTAs only: start playing, or go find someone to play against.
+          /why-its-different is still reached from the design-thesis section
+          below and from the header, so it loses nothing by leaving the hero.
+        -->
         <div class="hero__cta">
           <AppButton to="/how-to-play" size="lg">How to play</AppButton>
-          <AppButton to="/why-its-different" variant="secondary" size="lg">
-            Why it’s different
+          <AppButton
+            v-if="DISCORD_INVITE_IS_LIVE"
+            :href="LINKS.discord"
+            variant="secondary"
+            size="lg"
+          >
+            Join the Discord
           </AppButton>
         </div>
         <p class="hero__small">
@@ -154,26 +163,18 @@ const CHANGES = [
     </div>
   </PageSection>
 
-  <!-- ── Latest patch ──────────────────────────────────────── -->
-  <PageSection
-    tone="sunken"
-    eyebrow="Latest changes"
-    :title="LATEST_PATCH?.version ?? 'Latest patch'"
-  >
-    <template #head>
-      <p class="eyebrow">{{ formatPatchDate(LATEST_PATCH?.date ?? '') }}</p>
-    </template>
-
-    <template v-if="LATEST_PATCH">
-      <p class="lede patch__summary">{{ LATEST_PATCH.summary }}</p>
-      <PatchNoteBody :patch="LATEST_PATCH" :limit-sections="2" />
-      <div class="patch__more">
-        <AppButton :to="`/patch-notes/${LATEST_PATCH.date}`" variant="secondary">
-          Read the full patch notes
-        </AppButton>
-        <AppButton to="/patch-notes" variant="ghost">All patches →</AppButton>
-      </div>
-    </template>
+  <!--
+    Deliberately just a dated line. The balance detail belongs on /patch-notes;
+    what the homepage needs from it is the one thing a stranger actually wonders
+    about a mod, which is whether it is still alive. A date answers that.
+  -->
+  <PageSection tone="sunken" eyebrow="Still in development" title="Latest patch">
+    <p v-if="LATEST_PATCH" class="lede patch__line">
+      <strong>{{ LATEST_PATCH.version }}</strong> shipped {{ formatPatchDate(LATEST_PATCH.date) }}.
+    </p>
+    <div class="patch__more">
+      <AppButton to="/patch-notes" variant="ghost">Read the patch notes →</AppButton>
+    </div>
   </PageSection>
 
   <!-- ── Getting a game ────────────────────────────────────── -->
@@ -354,15 +355,13 @@ const CHANGES = [
 }
 
 /* ── Patch ────────────────────────────────────────────────── */
-.patch__summary {
-  margin-bottom: var(--space-8);
+.patch__line strong {
+  color: var(--c-text);
+  font-weight: var(--fw-medium);
 }
 
 .patch__more {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-8);
+  margin-top: var(--space-4);
 }
 
 /* ── Getting a game ───────────────────────────────────────── */
