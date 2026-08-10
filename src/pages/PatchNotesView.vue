@@ -45,11 +45,6 @@ function changeCount(sections: { items: string[] }[]) {
       </li>
     </ol>
 
-    <p class="source">
-      Patch notes are transcribed by hand from the mod's own release notes, so they may lag the live
-      build slightly.
-    </p>
-
     <AppButton to="/units" variant="ghost">Browse units →</AppButton>
   </div>
 </template>
@@ -117,12 +112,6 @@ function changeCount(sections: { items: string[] }[]) {
   font-size: var(--fs-sm);
   font-weight: var(--fw-semibold);
   color: var(--c-accent);
-}
-
-.source {
-  margin-bottom: var(--space-8);
-  font-size: var(--fs-sm);
-  color: var(--c-text-muted);
 }
 
 .container--text {
