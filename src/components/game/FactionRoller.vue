@@ -165,7 +165,7 @@ function reroll() {
               <RouterLink class="slot__unit" :to="`/units/${slot.unit.id}`">
                 {{ slot.unit.name }}
               </RouterLink>
-              <UpgradeBadge v-if="slot.upgradeId" :id="slot.upgradeId" :link="false" />
+              <UpgradeBadge v-if="slot.upgradeId" :id="slot.upgradeId" />
             </span>
             <!--
               The prose explaining locked slots now lives on /how-to-play, so the
