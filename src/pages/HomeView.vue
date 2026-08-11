@@ -190,8 +190,8 @@ const CHANGES = [
         <p class="eyebrow">On your own</p>
         <h3 class="way__title">Solo and co-op</h3>
         <p class="way__body">
-          A computer opponent on a normal map does not really work. The melee AI does not understand
-          a rolled faction. Survival maps do, because their attack waves are scripted.
+          Survival maps work, because their attack waves are scripted. A normal map with a computer
+          opponent does not. The melee AI has no idea what to do with a rolled faction.
         </p>
         <AppButton to="/how-to-play#survival" variant="secondary">How to set it up</AppButton>
       </AppCard>
