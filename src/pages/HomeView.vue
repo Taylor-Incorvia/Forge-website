@@ -193,7 +193,9 @@ const CHANGES = [
           Survival maps work, because their attack waves are scripted. A normal map with a computer
           opponent does not. The melee AI has no idea what to do with a rolled faction.
         </p>
-        <AppButton to="/how-to-play#survival" variant="secondary">How to set it up</AppButton>
+        <AppButton to="/how-to-play#survival" variant="secondary">
+          How to set it up on a survival map
+        </AppButton>
       </AppCard>
 
       <AppCard padding="lg" as="article" class="way way--versus">
