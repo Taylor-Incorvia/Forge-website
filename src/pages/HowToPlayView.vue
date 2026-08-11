@@ -99,6 +99,21 @@ const FIRST_GAME = [
     </div>
   </PageSection>
 
+  <PageSection title="Find an opponent">
+    <div class="prose">
+      <p>
+        Wildcard Arena runs 1v1 up to 4v4. The Discord is the fastest way to find someone, and where
+        anything new gets announced first.
+      </p>
+    </div>
+    <div class="find__cta">
+      <AppButton v-if="DISCORD_INVITE_IS_LIVE" :href="LINKS.discord">Join the Discord</AppButton>
+      <AppButton to="/community" :variant="DISCORD_INVITE_IS_LIVE ? 'secondary' : 'primary'">
+        Community and events
+      </AppButton>
+    </div>
+  </PageSection>
+
   <PageSection
     id="survival"
     tone="sunken"
@@ -132,21 +147,6 @@ const FIRST_GAME = [
           works well with it.
         </p>
       </AppCard>
-    </div>
-  </PageSection>
-
-  <PageSection title="Find an opponent">
-    <div class="prose">
-      <p>
-        Wildcard Arena runs 1v1 up to 4v4. The Discord is the fastest way to find someone, and where
-        anything new gets announced first.
-      </p>
-    </div>
-    <div class="find__cta">
-      <AppButton v-if="DISCORD_INVITE_IS_LIVE" :href="LINKS.discord">Join the Discord</AppButton>
-      <AppButton to="/community" :variant="DISCORD_INVITE_IS_LIVE ? 'secondary' : 'primary'">
-        Community and events
-      </AppButton>
     </div>
   </PageSection>
 </template>
