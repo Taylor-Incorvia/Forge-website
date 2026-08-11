@@ -51,7 +51,7 @@ const FIRST_GAME = [
   },
   {
     title: 'An add-on unlocks the top slot',
-    body: 'Tech Lab unlocks Barracks slot 4, Reactor unlocks Factory slot 3, Tech Reactor unlocks Starport slot 3. Add-ons do not double production here. Each facility builds exactly one add-on type, on the X key.',
+    body: 'Tech Lab unlocks Barracks slot 4, Reactor unlocks Factory slot 3, Tech Reactor unlocks Starport slot 3. Add-ons do not double production here. Each facility builds exactly one add-on type, on the X key by default.',
   },
   {
     title: 'Upgrades research at the tech buildings',
