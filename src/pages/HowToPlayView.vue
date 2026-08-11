@@ -99,7 +99,12 @@ const FIRST_GAME = [
     </div>
   </PageSection>
 
-  <PageSection tone="sunken" eyebrow="Solo and co-op" title="Prefer vs AI? Try survival maps">
+  <PageSection
+    id="survival"
+    tone="sunken"
+    eyebrow="Solo and co-op"
+    title="Prefer vs AI? Try survival maps"
+  >
     <div class="solo">
       <div class="prose">
         <p>

@@ -59,6 +59,13 @@ const headingId = computed(() => (props.title ? `${props.id ?? autoId}-heading` 
 <style scoped>
 .section {
   padding-block: var(--section-y);
+  /*
+   * The `id` prop exists so sections can be deep-linked, and the header is
+   * sticky — without this a targeted section scrolls to sit underneath it.
+   * Vue Router's scrollBehavior reads scroll-margin-top, so this covers the
+   * smooth in-app scroll; base.css scroll-padding-top covers a cold load.
+   */
+  scroll-margin-top: calc(var(--header-h) + var(--space-6));
 }
 
 .section--sunken {

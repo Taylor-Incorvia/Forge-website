@@ -194,7 +194,7 @@ const CHANGES = [
           a rolled faction. Survival maps do, because their attack waves are scripted. Load the mod
           onto <strong>Redstone Zerg Survival</strong> and play alone or with up to two friends.
         </p>
-        <AppButton to="/how-to-play" variant="secondary">How to set it up</AppButton>
+        <AppButton to="/how-to-play#survival" variant="secondary">How to set it up</AppButton>
       </AppCard>
 
       <AppCard padding="lg" as="article" class="way way--versus">
