@@ -1,18 +1,47 @@
 # TODO
 
-Picking this back up after the trip. Written 2026-08-06 at rev 61, amended through **rev 67**.
+Written 2026-08-06 at rev 61, amended through **rev 94**.
 
-Current state: 46 routes prerender, typecheck clean, **nothing committed yet**, nothing deployed.
-Local preview lives at `:4173` behind a Cloudflare quick tunnel (see README). Those two detached
-processes will be long dead by the time you read this; rerun `scripts/serve-public.ps1`.
+Current state: 46 routes prerender, typecheck clean, **26 commits on `main`, nothing pushed**,
+nothing deployed. Local preview lives at `:4173` behind a Cloudflare quick tunnel (see README).
+Those two detached processes will be long dead by the time you read this; rerun
+`scripts/serve-public.ps1`.
 
 ---
 
 ## 0. Read this first
 
-**Nothing is committed.** `git init` has run, the branch is `main`, and there are **no commits at
-all** — 62 changed or untracked paths sit in the working tree, inside a OneDrive folder. Every
-change described below exists only as loose files. Commit before doing anything else.
+**Committed, but not backed up.** `50b7c21` is the "Initial AI scaffold" restore point;
+`git reset --hard 50b7c21` returns to it. Everything since is small single-purpose commits, each
+revertable on its own. But there is still **no remote** — 26 commits live in one OneDrive folder.
+Pushing is blocker #1 below, and it gates the CSS-experiment branches too: push first, branch
+second.
+
+### Do this before anything else: look at it on a desktop
+
+**Everything was reviewed on a phone.** The site has 10 media queries, all `min-width`, from 46rem
+to 64rem. A phone viewport is ~24–27rem, so **not one of them ever fired**. Container maxes at
+74rem, so desktop is a different composition, not a wider phone. Nothing should be broken (auto-fit
+grids, clamps, max-widths throughout) but the proportions are genuinely unverified. In likely order
+of annoyance:
+
+1. **The desktop header is entirely unseen.** At 62rem `AppHeader` swaps the hamburger for a
+   horizontal bar with six nav links, a Discord link and the Play button. You have only ever seen
+   the drawer.
+2. **`.tenets` now has two cards, not three.** `auto-fit` + `1fr` stretches them to ~570px each at
+   full container, so ~25 words of body will run about two lines. Likely to read sparse.
+3. **`.panel` under the roller.** At 52rem the roller becomes three columns across the full
+   container, then the "Your Faction" frame is capped at `max-width: 34rem` beneath it. May look
+   orphaned against the wide grid.
+4. **Hero vertical balance.** At 60rem it splits 1.05fr / 0.95fr with the video right. The left
+   column lost a lot of height (lede went from four sentences to one, fact strip deleted), so the
+   copy may now be much shorter than the 16:9 video.
+5. **Two very thin bands**, Curated and Latest patch, both sitting in full `--section-y` padding.
+   Brief on a phone; possibly underfilled on a wide screen.
+6. **Five empty `MediaFrame` placeholders** get much larger and more obviously empty.
+
+Caveat worth carrying: every "verified" in the build log meant *the right markup and text shipped*,
+never *it looked right*.
 
 ### What changed after this doc was first written (rev 61 → 67)
 
@@ -398,7 +427,16 @@ If you go with a route, the mechanical checklist is short:
 
 ---
 
-## 5. Homepage information hierarchy
+## 5. Homepage information hierarchy — IMPLEMENTED (rev 69–94)
+
+> **This section is now a record, not a plan.** It was built out over rev 69–94. The current
+> homepage runs: hero (definition) → roller + "Your Faction" panel → Curated, not chaos → What if
+> StarCraft didn't have fixed matchups? → Five clicks → Latest patch → Solo, co-op, or versus. The
+> "How it plays" cards moved to `/how-to-play`, the patch section shrank to a dated line, and the
+> hero CTAs are now How to play + Join the Discord.
+>
+> Still open from it: **section rhythm** (§0 item 5) and the empty media frames. Kept below because
+> the reasoning explains why the page is shaped this way.
 
 The homepage's failure is not bad copy, it is **flat priority** — every section is equally
 important, so nothing is. Fixing that settles most of §2 for free.
