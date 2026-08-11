@@ -191,8 +191,7 @@ const CHANGES = [
         <h3 class="way__title">Solo and co-op</h3>
         <p class="way__body">
           A computer opponent on a normal map does not really work. The melee AI does not understand
-          a rolled faction. Survival maps do, because their attack waves are scripted. Load the mod
-          onto <strong>Redstone Zerg Survival</strong> and play alone or with up to two friends.
+          a rolled faction. Survival maps do, because their attack waves are scripted.
         </p>
         <AppButton to="/how-to-play#survival" variant="secondary">How to set it up</AppButton>
       </AppCard>
@@ -401,11 +400,6 @@ const CHANGES = [
   flex: 1;
   color: var(--c-text-secondary);
   line-height: var(--lh-relaxed);
-}
-
-.way__body strong {
-  color: var(--c-text);
-  font-weight: var(--fw-semibold);
 }
 
 /* ── Breakpoints ──────────────────────────────────────────── */
