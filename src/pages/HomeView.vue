@@ -113,9 +113,10 @@ const CHANGES = [
 
     <div class="panel">
       <MediaFrame
+        src="/media/your-faction-panel.png"
+        alt="The in-game Your Faction panel: three groups, one per production building, each showing the units rolled into its slots with the upgrade paired to each unit directly beneath."
         label="The “Your Faction” panel"
-        hint="The in-game panel showing every rolled unit with its paired upgrade, grouped by facility. This is the single most useful screenshot for explaining the mod."
-        ratio="4/3"
+        ratio="425/589"
         caption="The same thing in game. Your whole faction, one glance away."
       />
     </div>
@@ -290,11 +291,12 @@ const CHANGES = [
   max-width: 62rem;
 }
 
-/* The in-game counterpart to the draw above it. Capped so a 4/3 frame does not
-   tower over the roller it is meant to corroborate. */
+/* The in-game counterpart to the draw above it. Capped near the screenshot's
+   own 425px width so the panel is never upscaled, which on a UI capture reads
+   as blur rather than as a big image. */
 .panel {
   margin-top: var(--space-8);
-  max-width: 34rem;
+  max-width: 27rem;
 }
 
 .roller-scale strong {

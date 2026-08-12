@@ -22,7 +22,13 @@ const props = withDefaults(
     label: string
     /** Extra guidance for whoever captures the shot. Placeholder only. */
     hint?: string
-    ratio?: '16/9' | '4/3' | '3/2' | '1/1' | '21/9'
+    /**
+     * The presets cover most shots and keep autocomplete useful. `(string & {})`
+     * allows an exact ratio for assets that have one, because `frame__media` is
+     * `object-fit: cover` — a near-miss silently crops. A UI panel screenshot
+     * would lose its own border that way, so it declares "425/589".
+     */
+    ratio?: '16/9' | '4/3' | '3/2' | '1/1' | '21/9' | (string & {})
     /** Skip lazy-loading for above-the-fold media. */
     priority?: boolean
     kind?: 'image' | 'video'
