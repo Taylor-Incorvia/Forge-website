@@ -23,14 +23,16 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-12 · rev 97'
+export const BUILD_STAMP = '2026-08-17 · rev 98'
 
 export const LINKS = {
   /**
    * The one place the Discord invite is defined — the header, the homepage,
    * the footer and /community all read it from here.
    */
-  discord: 'https://discord.gg/Mvy5zPA6x',
+  /* Permanent invite — does not expire. Replaced the old Mvy5zPA6x link, which
+     did not match the one on the mod's own store listing. */
+  discord: 'https://discord.gg/UYjC3QTkuV',
   /*
    * The mod repository is deliberately NOT linked from the site. It is public
    * for other reasons, not as a player-facing resource, and sending players to
@@ -41,6 +43,17 @@ export const LINKS = {
 
 /** Set to false to hide every Discord CTA site-wide (e.g. if an invite expires). */
 export const DISCORD_INVITE_IS_LIVE = true
+
+/**
+ * The /community page is hidden until there is more to say there than "join the
+ * Discord". Flip to `true` to restore it everywhere at once — the route, the
+ * header nav, the footer column, the in-page CTAs, the prerendered HTML and the
+ * sitemap entry all read this one flag. `vite.config.ts` imports it too, so a
+ * disabled page is never built rather than being built and merely unlinked.
+ *
+ * CommunityView.vue is deliberately left in place; nothing to rebuild later.
+ */
+export const COMMUNITY_PAGE_ENABLED = false
 
 export const RACE_LABEL: Record<'terran' | 'protoss' | 'zerg', string> = {
   terran: 'Terran',

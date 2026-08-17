@@ -5,7 +5,13 @@ import MediaFrame from '@/components/ui/MediaFrame.vue'
 import PageSection from '@/components/layout/PageSection.vue'
 import FactionRoller from '@/components/game/FactionRoller.vue'
 import { useMeta } from '@/composables/useMeta'
-import { SITE, FACTION_COMBINATIONS, LINKS, DISCORD_INVITE_IS_LIVE } from '@/data/site'
+import {
+  SITE,
+  FACTION_COMBINATIONS,
+  LINKS,
+  DISCORD_INVITE_IS_LIVE,
+  COMMUNITY_PAGE_ENABLED,
+} from '@/data/site'
 import { LATEST_PATCH, formatPatchDate } from '@/data/patches'
 
 useMeta({
@@ -47,8 +53,8 @@ const CHANGES = [
           <span class="hero__title-alt">You’re dealt one.</span>
         </h1>
         <p class="lede hero__lede">
-          Wildcard Arena is a mod for standard StarCraft II multiplayer, where every game deals you
-          a procedurally generated faction built from units and upgrades across all three races.
+          Every game deals you a randomized faction — a mash-up of units and upgrades from all three
+          SC2 races.
         </p>
         <!--
           Two CTAs only: start playing, or go find someone to play against.
@@ -72,10 +78,6 @@ const CHANGES = [
           the thing in language that needs no glossary; this teaches the term
           next to the instruction where it becomes useful.
         -->
-        <p class="hero__small">
-          It loads with the lobby as a melee mod, not an Arcade map. StarCraft II multiplayer is
-          free. Nothing to buy, nothing to download.
-        </p>
       </div>
 
       <div class="hero__media">
@@ -100,14 +102,10 @@ const CHANGES = [
   >
     <FactionRoller />
     <div class="roller-notes">
-      <p class="lede">
-        Each slot holds one unit type you can build all game, and each of those units is dealt one
-        upgrade. The randomness is in the menu: build from a slot and you get that unit, every time.
-      </p>
       <p class="roller-scale">
-        That is a real draw, obeying the same pools and caps the mod uses at the beginning of each
-        game. There are
-        <strong>{{ FACTION_COMBINATIONS.toLocaleString('en-US') }}</strong> possible rolls.
+        This roll is real. Same odds as a live game.
+        <strong>{{ FACTION_COMBINATIONS.toLocaleString('en-US') }}</strong>
+        possible factions. You'll never play the same one twice.
       </p>
     </div>
 
@@ -117,7 +115,6 @@ const CHANGES = [
         alt="The in-game Your Faction panel: three groups, one per production building, each showing the units rolled into its slots with the upgrade paired to each unit directly beneath."
         label="The “Your Faction” panel"
         ratio="425/589"
-        caption="The same thing in game. Your whole faction, one glance away."
       />
     </div>
   </PageSection>
@@ -126,7 +123,7 @@ const CHANGES = [
   <PageSection
     eyebrow="Variety inside constraints"
     title="Curated, not chaos"
-    lede="The rolls are rigged for fairness to prevent both useless and oppressive ones. The faction is random. Winning is not: macro, micro and reading your opponent still decide every game."
+    lede="The randomness is rigged for fairness to prevent both useless and oppressive rolls. The faction is random. Winning is not: macro, micro and reading your opponent still decide every game."
   >
     <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
   </PageSection>
@@ -217,7 +214,9 @@ const CHANGES = [
           and anything new get announced first.
         </p>
         <AppButton v-if="DISCORD_INVITE_IS_LIVE" :href="LINKS.discord">Join the Discord</AppButton>
-        <AppButton v-else to="/community" variant="secondary">Community</AppButton>
+        <AppButton v-else-if="COMMUNITY_PAGE_ENABLED" to="/community" variant="secondary">
+          Community
+        </AppButton>
       </AppCard>
     </div>
   </PageSection>

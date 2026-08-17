@@ -6,7 +6,7 @@ import MediaFrame from '@/components/ui/MediaFrame.vue'
 import AppCard from '@/components/ui/AppCard.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import { useMeta } from '@/composables/useMeta'
-import { LINKS, DISCORD_INVITE_IS_LIVE } from '@/data/site'
+import { LINKS, DISCORD_INVITE_IS_LIVE, COMMUNITY_PAGE_ENABLED } from '@/data/site'
 
 useMeta({
   title: 'How to Play',
@@ -76,10 +76,11 @@ const FIRST_GAME = [
       <StepList :steps="STEPS" />
       <div class="flow__media">
         <MediaFrame
-          label="The Create with Mod screen"
-          hint="A capture of the melee lobby setup with “Wildcard Arena” selected in the mod search. This is the step people get wrong most often."
-          ratio="16/9"
-          caption="Step 3–4: Create with Mod, then search for Wildcard Arena."
+          src="/media/select-extension-mod.png"
+          alt="StarCraft II's Select Extension Mod dialog, reached from Custom then Melee. A search for “wildcard” returns Wildcard Arena, selected, with its store listing on the right and a Create Lobby button below."
+          label="The Select Extension Mod screen"
+          ratio="2557/1355"
+          caption="Steps 3–4: Create with Mod, then search for Wildcard Arena."
         />
       </div>
     </div>
@@ -108,7 +109,11 @@ const FIRST_GAME = [
     </div>
     <div class="find__cta">
       <AppButton v-if="DISCORD_INVITE_IS_LIVE" :href="LINKS.discord">Join the Discord</AppButton>
-      <AppButton to="/community" :variant="DISCORD_INVITE_IS_LIVE ? 'secondary' : 'primary'">
+      <AppButton
+        v-if="COMMUNITY_PAGE_ENABLED"
+        to="/community"
+        :variant="DISCORD_INVITE_IS_LIVE ? 'secondary' : 'primary'"
+      >
         Community and events
       </AppButton>
     </div>

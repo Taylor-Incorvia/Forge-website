@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 import { UNITS } from './src/data/units'
 import { PATCHES } from './src/data/patches'
-import { SITE } from './src/data/site'
+import { SITE, COMMUNITY_PAGE_ENABLED } from './src/data/site'
 
 /**
  * Every route that gets prerendered to static HTML, including the dynamic
@@ -19,7 +19,9 @@ const STATIC_ROUTES = [
   '/units',
   '/upgrades',
   '/patch-notes',
-  '/community',
+  // Same flag the router and the nav read, so a hidden page is never built at
+  // all rather than built and merely unlinked.
+  ...(COMMUNITY_PAGE_ENABLED ? ['/community'] : []),
 ]
 
 const CONTENT_ROUTES = [

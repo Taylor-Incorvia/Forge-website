@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import AppButton from '@/components/ui/AppButton.vue'
 import BrandMark from '@/components/layout/BrandMark.vue'
-import { LINKS, DISCORD_INVITE_IS_LIVE } from '@/data/site'
+import { LINKS, DISCORD_INVITE_IS_LIVE, COMMUNITY_PAGE_ENABLED } from '@/data/site'
 
 const NAV = [
   { to: '/how-to-play', label: 'How to Play' },
@@ -11,7 +11,7 @@ const NAV = [
   { to: '/units', label: 'Units' },
   { to: '/upgrades', label: 'Upgrades' },
   { to: '/patch-notes', label: 'Patch Notes' },
-  { to: '/community', label: 'Community' },
+  ...(COMMUNITY_PAGE_ENABLED ? [{ to: '/community', label: 'Community' }] : []),
 ]
 
 const open = ref(false)

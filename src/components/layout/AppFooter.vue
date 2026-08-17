@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import BrandMark from '@/components/layout/BrandMark.vue'
-import { LINKS, SITE, DISCORD_INVITE_IS_LIVE, BUILD_STAMP } from '@/data/site'
+import {
+  LINKS,
+  SITE,
+  DISCORD_INVITE_IS_LIVE,
+  COMMUNITY_PAGE_ENABLED,
+  BUILD_STAMP,
+} from '@/data/site'
 
 const COLUMNS = [
   {
@@ -41,10 +47,17 @@ const year = 2026
           </ul>
         </nav>
 
-        <nav class="ftr__col" aria-label="Community">
+        <!-- Skipped entirely rather than rendering a heading over an empty list. -->
+        <nav
+          v-if="COMMUNITY_PAGE_ENABLED || DISCORD_INVITE_IS_LIVE"
+          class="ftr__col"
+          aria-label="Community"
+        >
           <h2 class="eyebrow">Community</h2>
           <ul class="ftr__list">
-            <li><RouterLink to="/community" class="ftr__link">Community</RouterLink></li>
+            <li v-if="COMMUNITY_PAGE_ENABLED">
+              <RouterLink to="/community" class="ftr__link">Community</RouterLink>
+            </li>
             <li v-if="DISCORD_INVITE_IS_LIVE">
               <a class="ftr__link" :href="LINKS.discord" target="_blank" rel="noopener noreferrer">
                 Discord

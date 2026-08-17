@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { COMMUNITY_PAGE_ENABLED } from '@/data/site'
 
 /**
  * Every page is lazily imported so each route ships its own JS chunk.
@@ -46,11 +47,20 @@ export const routes: RouteRecordRaw[] = [
     name: 'patch-note',
     component: () => import('@/pages/PatchNoteView.vue'),
   },
-  {
-    path: '/community',
-    name: 'community',
-    component: () => import('@/pages/CommunityView.vue'),
-  },
+  /*
+   * Behind COMMUNITY_PAGE_ENABLED. With the route absent, /community falls
+   * through to the catch-all below, so a stale bookmark gets the 404 page
+   * rather than a blank screen.
+   */
+  ...(COMMUNITY_PAGE_ENABLED
+    ? [
+        {
+          path: '/community',
+          name: 'community',
+          component: () => import('@/pages/CommunityView.vue'),
+        } satisfies RouteRecordRaw,
+      ]
+    : []),
   /*
    * An explicit /404 so it can be prerendered to dist/404.html, which GitHub
    * Pages serves for any unmatched path. The catch-all below handles the same
