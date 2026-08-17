@@ -11,10 +11,9 @@ import type { Patch } from './types'
 
 export const PATCHES: Patch[] = [
   {
-    date: '2026-07-27',
-    version: 'Wildcard Arena 3.0',
+    date: '2026-08-16',
     summary:
-      'The big one: a "Your Faction" panel so you can actually see the hand you were dealt. Plus a full caster overhaul, cost and build-time tuning, and quality-of-life.',
+      'The big one: a "Your Faction" panel so you can actually see the hand you were dealt, live opponent scouting, a 12-worker start, a full caster overhaul, and a pile of cost and build-time tuning.',
     sections: [
       {
         title: 'New — The "Your Faction" Panel',
@@ -30,13 +29,20 @@ export const PATCHES: Patch[] = [
         items: [
           'Get **vision of an enemy building** and a row of icons floats above it showing what it can produce or research.',
           '**Barracks / Factory / Starport** show the units they can build. **Ghost Academy / Armory / Fusion Core** show the upgrades they can research.',
-          '**Fog-gated** — you only see it while you have vision, so *send a scout*. Rolls are per-player, so scouting one building reveals that whole facility’s lineup. Scouting matters now.',
+          '**Icon fog of war** — the icons show **only while you currently have vision** of the building and vanish the moment you lose sight of it, so *send a scout and keep watching*. Rolls are per-player, so scouting one building reveals that whole facility’s lineup. Scouting matters now.',
+        ],
+      },
+      {
+        title: 'New — 12-Worker Start',
+        items: [
+          'Games now open with **12 workers** rather than 8. Let us get this done.',
+          'The Command Center grants **15 supply**.',
         ],
       },
       {
         title: 'Casters Overhauled',
         items: [
-          '**+25% energy regeneration** when a caster researches its rolled spell — for the rest of the game. Teching into a caster now means *more casts over the whole game*, rather than one hyper-efficient spell you dump in a single fight.',
+          '**+25% energy regeneration** when a caster researches its rolled spell. You get more casts of all of your spells, including the newly upgraded spell. I am keeping my eyes on this change. If it overperforms, I will look at other options.',
           'With regen doing that job, **spell energy costs moved back toward standard**: Force Field / Graviton Beam / Auto-Turret 40 to 50, Guardian Shield / Fungal Growth 50 to 75, Neural Parasite 75 to 100, Parasitic Bomb 100 to 125, Abduct 50 to 75, Irradiate 40 to 50.',
           '**Corsair** energy normalized to standard (200 max) so the new regen applies evenly.',
         ],
@@ -44,18 +50,18 @@ export const PATCHES: Patch[] = [
       {
         title: 'Balance — Costs',
         items: [
-          '**Thor:** gas cost reduced to **300/150** — too weak for the investment.',
+          '**Thor:** gas cost reduced to **300/150**.',
           '**War Hound:** re-costed to **200/75**.',
           '**Goliath:** gas **50 to 75** — covering both air *and* ground on cheap gas made it too efficient for how flexible it is.',
-          '**Raven, Viper:** minerals **100 to 75**. **Infestor:** minerals **100 to 50**. They were under-used, and they are still gas-gated.',
+          '**Raven, Viper:** minerals **100 to 75**. **Infestor:** minerals **100 to 50**.',
         ],
       },
       {
         title: 'Balance — Build Times (opening pacing)',
         items: [
-          'Cheap early units now build a little slower, so **how many production buildings you open with matters again** — one building used to churn units out fast enough to soak your whole economy, which flattened the opening. Slower now: **Zealot, Marine, Hydralisk, Sentry, Zergling, Vulture, Hellion, Mutalisk**.',
+          'Cheap early units now build a little slower, so **how many production buildings you open with matters again** — one building used to churn units out fast enough to soak nearly an entire base worth of eco, which flattened the opening. Slower now: **Zealot, Marine, Hydralisk, Sentry, Zergling, Vulture, Hellion, Mutalisk**.',
           '**War Hound:** build time fixed — it was somehow building *slower than a Thor*; now appropriately quick for its tier.',
-          '**DuskWing:** builds slower — a buffed Banshee should not come out faster than a stock one.',
+          '**DuskWing:** the eye test was right — it was quietly a strictly-better Banshee (+50% DPS, +25% HP) that built *faster* on top of it. Cost **200/150 to 250/175** and build time **48 to 65** (now genuinely slower than a stock Banshee). It should be a premium unit you commit to, not one you flood over an army.',
           '**Immortal & Thor:** build times pulled back to standard (they were oddly slow before).',
           '**Stalker:** still builds fast from the Factory (its speed-up is kept, just trimmed slightly).',
         ],
@@ -68,28 +74,31 @@ export const PATCHES: Patch[] = [
         ],
       },
       {
-        title: 'Removed / Pool Changes',
+        title: 'Removing useless upgrades',
         items: [
-          '**Stim** removed from Zerglings (did effectively nothing on them).',
+          '**Stim** removed from Zerglings.',
           '**Twin-Linked Flamethrowers** removed from the Hellion pool — a near-invisible dud. A proper "flame wall" upgrade is planned to replace it.',
-          '**Blink** no longer rolls on the **Stalker** — it already starts with Blink, so it was rolling a redundant second one.',
+        ],
+      },
+      {
+        title: 'New upgrade cap',
+        items: [
           '**Cloak is now one-per-faction:** only a single unit can roll cloak — Ghost, Wraith and DuskWing share one cap, so you cannot stack multiple cloaked units.',
         ],
       },
       {
         title: 'Quality of Life',
         items: [
-          'Picked Zerg or Protoss? Your workers now **auto-mine at 0:00** like a Terran start — no more hand-ordering them onto minerals.',
+          'Picked Zerg or Protoss? Your workers now **auto-mine at 0:00** like a Terran start — no more hand-ordering them onto minerals. Which race you pick now does not matter at all: just close your eyes and roll the dice.',
           'The **Queen** is now included in **Select All Army**.',
-          'The "Your Faction" panel no longer covers the idle-worker count.',
         ],
       },
       {
         title: 'Bug Fixes',
         items: [
           '**Disruption Web** tooltip now correctly states it stops **all** ground units and structures under it (yours and the enemy’s) — it is area denial, so cast it where the enemy is and keep your own units clear.',
-          '**One upgrade per unit is now enforced clearly** — you can no longer queue the same upgrade a second time. The research locks the moment you start it (it used to only lock on completion, so a redundant re-queue was possible; it never did anything but waste resources).',
-          '**Tooltip corrections:** Missile Pods now reads **flat 60 damage to air** (it was still showing the old splash text), Yamato **240** (was 260), and D8 Charge **30 damage (+100 vs structures)** (was 155) — the numbers now match what the abilities actually do.',
+          '**One upgrade per unit is now clearer** — you can no longer queue the same upgrade a second time. The research locks the moment you start it (it used to only lock on completion, so a redundant re-queue was possible; it never did anything but waste resources).',
+          '**Tooltip corrections:** Missile Pods now reads **flat 60 damage to air**, Yamato **240** (was 260), and D8 Charge **30 damage (+100 vs structures)** (was 155) — the numbers now match what the abilities actually do.',
         ],
       },
     ],

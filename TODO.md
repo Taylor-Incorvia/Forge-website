@@ -525,6 +525,63 @@ where "outside the lens of the three matchups" belongs.
 
 ---
 
+## 6. Korean translation (not started, deliberately)
+
+Only Korean is worth doing. European and Mexican players you play with all use the English client,
+so the English site already serves them.
+
+### The blocking fact
+
+GitHub Pages is static. **There is no server, so nothing can read `Accept-Language`.** Detection
+has to happen in the browser, after English HTML has already loaded.
+
+That means: prerender **two trees** (`/` and `/ko/...`, roughly 46 → 92 files via `ALL_ROUTES` in
+`vite.config.ts`), then a small inline script checks `navigator.language.startsWith('ko')` and
+redirects. Three non-negotiables:
+
+- Always ship a **manual language switcher**. Auto-redirect with no escape hatch is the classic sin.
+- `<link rel="alternate" hreflang="ko">` on each pair, or Google treats one as duplicate content.
+- Guard with `localStorage` and **never redirect a URL that already has a locale prefix**, or loops.
+
+Do **not** use runtime string-swapping alone (`vue-i18n` with one HTML). The prerendered markup
+would stay English, so Korean text would not exist for search or Discord link previews, and every
+Korean visitor gets a flash of English first.
+
+### Scope, measured
+
+| Area | Words |
+| --- | --- |
+| Shell + reference pages | 4,157 |
+| Landing pages (Home / How to Play / Why Different / Community) | 2,822 |
+| Unit + upgrade data | 1,809 |
+| Patch notes | 1,168 |
+| **Total** | **9,956** |
+
+**Translate prose only.** Skip `patches.ts` (re-translating every patch forever, with no automated
+sync) and the reference data. That takes it from ~10,000 words to **~2,800**.
+
+### Two domain traps
+
+1. **Blizzard already localized SC2 into Korean.** Unit names have canonical forms — Marine is
+   해병, Stalker is 추적자. Machine translation invents names no Korean player recognizes.
+2. **But the mod's UI is English.** The "Your Faction" screenshot on the homepage proves it. Korean
+   unit names on the site would mismatch what players see in game. So: **keep unit and upgrade
+   names in English**, translate the prose around them.
+
+### Sequencing — the actual argument for waiting
+
+If a Korean player cannot read the English site, they cannot read the mod either: tooltips, the
+faction panel and upgrade descriptions are all English. Translating the site gets them excited and
+drops them into a UI they cannot read. **Localize the mod's tooltips first.** The site is a
+secondary funnel anyway; people find this in the in-game Custom list.
+
+### You do not need to speak Korean
+
+Ask a Korean player in the Discord to review ~2,800 words. Gets you the correct client vocabulary
+for free and hands someone a reason to be invested. Better than any translation service.
+
+---
+
 ## Rules that still hold
 
 - The mod repo at `...\Forge` is **read-only**. Never edit it from here.

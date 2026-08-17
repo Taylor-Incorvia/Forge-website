@@ -176,8 +176,17 @@ const CHANGES = [
     about a mod, which is whether it is still alive. A date answers that.
   -->
   <PageSection tone="sunken" eyebrow="Still in development" title="Latest patch">
+    <!-- Patches only sometimes carry a version headline, so the date is what is
+         always available and it is the part that answers "is this alive?". -->
     <p v-if="LATEST_PATCH" class="lede patch__line">
-      <strong>{{ LATEST_PATCH.version }}</strong> shipped {{ formatPatchDate(LATEST_PATCH.date) }}.
+      <template v-if="LATEST_PATCH.version">
+        <strong>{{ LATEST_PATCH.version }}</strong> shipped
+        {{ formatPatchDate(LATEST_PATCH.date) }}.
+      </template>
+      <template v-else>
+        Shipped <strong>{{ formatPatchDate(LATEST_PATCH.date) }}</strong
+        >.
+      </template>
     </p>
     <div class="patch__more">
       <AppButton to="/patch-notes" variant="ghost">Read the patch notes →</AppButton>

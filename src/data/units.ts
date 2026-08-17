@@ -933,9 +933,11 @@ export const UNITS: Unit[] = [
     facility: 'starport',
     slot: 2,
     role: 'fighter',
-    cost: { minerals: 200, vespene: 150 },
+    // 250/175 and 65s from patch 2026-08-16: it was a strictly-better Banshee
+    // that also built faster, so cost and build time both went up.
+    cost: { minerals: 250, vespene: 175 },
     supply: 3,
-    buildTimeCatalog: 48,
+    buildTimeCatalog: 65,
     life: 175,
     armor: 0,
     speed: 2.75,
