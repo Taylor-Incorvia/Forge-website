@@ -100,7 +100,7 @@ const resultsLabel = computed(
   <PageHero
     eyebrow="Reference"
     :title="`${UNITS.length} units, one faction at a time`"
-    lede="Every unit that can roll into a production slot, drawn from all three races. A single game deals you ten of them, one per slot."
+    lede="Every unit that can roll into a production slot, drawn from all three races. A single game deals you ten of them."
   />
 
   <div class="container">
