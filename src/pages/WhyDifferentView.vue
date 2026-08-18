@@ -70,7 +70,7 @@ const TENETS = [
         <AppButton to="/upgrades" variant="secondary">Browse the upgrade pools</AppButton>
       </div>
       <!--
-        Cropped to 1280x488 to cut the command card, minimap, facecam and
+        Seconds 6-14, cropped to 1280x488 to cut the command card, minimap, facecam and
         keypress overlay. The frame declares that exact ratio because
         frame__media is object-fit: cover and a preset would crop the fight.
       -->
