@@ -49,7 +49,7 @@ const TENETS = [
     </div>
   </PageSection>
 
-  <PageSection eyebrow="Corollary" title="Noticeable upgrades over invisible ones">
+  <PageSection title="Noticeable upgrades over invisible ones">
     <div class="split split--media">
       <div class="prose">
         <p>
@@ -69,10 +69,18 @@ const TENETS = [
         </p>
         <AppButton to="/upgrades" variant="secondary">Browse the upgrade pools</AppButton>
       </div>
+      <!--
+        Cropped to 1280x488 to cut the command card, minimap, facecam and
+        keypress overlay. The frame declares that exact ratio because
+        frame__media is object-fit: cover and a preset would crop the fight.
+      -->
       <MediaFrame
+        src="/media/upgrade-in-a-fight.mp4"
+        poster="/media/upgrade-in-a-fight-poster.jpg"
+        kind="video"
+        alt="Zealots with rolled Raptor Charge leaping up a cliff into a Terran position, fighting Siege Tanks and Marines while the Your Faction panel stays open at the left."
         label="An upgrade visibly changing a fight"
-        hint="For example: a Battlecruiser firing a rolled Yamato Cannon, or Concussive Shells slowing an entire group caught in a Colossus beam line."
-        ratio="4/3"
+        ratio="1280/488"
       />
     </div>
   </PageSection>
