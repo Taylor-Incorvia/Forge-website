@@ -82,7 +82,7 @@ const CHANGES = [
 
       <div class="hero__media">
         <!--
-          TRYING OUT clip 6 (box-art army fight), seconds 23-31, bottom-cropped
+          TRYING OUT clip 6 (box-art army fight), seconds 18-31, bottom-cropped
           to drop the command card, minimap, facecam and keypress overlay.
           hero-battle.mp4 is still in public/media — to go back, restore the
           three lines below to hero-battle.mp4 / -poster.jpg / ratio 16/9.

@@ -582,6 +582,49 @@ for free and hands someone a reason to be invested. Better than any translation 
 
 ---
 
+## 7. Serve video from a URL instead of committing it
+
+Right now every clip lives in `public/media`, gets committed, and ships in the
+deploy. That works and GitHub Pages serves it fine — but binaries in git are
+permanent, and clips get re-cut.
+
+**Already true after two days of this:** ~6.5 MB of media blobs in history, from
+10 blobs, for 4 files that are currently ~3.7 MB on disk. Every re-encode adds a
+full copy forever. Re-cutting the hero three times is what that looks like.
+
+### When it actually matters
+
+Not yet. It matters when either:
+
+- you iterate on clips enough that history dwarfs the source (a clone gets slow), or
+- you post the Reddit series and the traffic makes Pages bandwidth a question.
+
+GitHub Pages is a soft ~100 GB/month. A 1 MB autoplaying hero is ~1 GB per 1,000
+visitors, so a good Reddit run puts that in play sooner than you would think.
+
+### Options, cheapest first
+
+1. **Do nothing.** Genuinely fine until one of the two triggers above fires.
+2. **Keep committing, but stop re-committing.** Encode to a scratch dir, only
+   copy into `public/media` when a cut is final. Most of that 6.5 MB is drafts.
+3. **External host + URL** — Cloudflare R2 or Bunny, referenced absolutely in
+   `MediaFrame src`. Repo stays text-only, bandwidth leaves Pages entirely.
+   Costs a few dollars a month and a second thing to keep alive.
+4. **Git LFS.** Keeps one URL and one workflow, but GitHub Pages does **not**
+   resolve LFS pointers on deploy — the build would ship the pointer file, not
+   the video. Only viable if CI fetches LFS before building. Mentioned because
+   it is the obvious idea and it quietly breaks.
+
+### If you go external
+
+- `MediaFrame` needs no change; `src` is already just a string.
+- Keep the poster local. It is small, it is the first paint, and a cross-origin
+  poster is the one that will stall.
+- The site has no CSP today. Adding one later means allowlisting the media host.
+- Absolute URLs mean the site breaks if the host lapses. Local files never do.
+
+---
+
 ## Rules that still hold
 
 - The mod repo at `...\Forge` is **read-only**. Never edit it from here.
