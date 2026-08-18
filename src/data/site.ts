@@ -23,15 +23,16 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-17 · rev 98'
+export const BUILD_STAMP = '2026-08-18 · rev 99'
 
 export const LINKS = {
   /**
-   * The one place the Discord invite is defined — the header, the homepage,
-   * the footer and /community all read it from here.
+   * The one place the Discord invite is defined — the header, the hero, the
+   * homepage cards, /how-to-play and the footer all read it from here.
+   *
+   * Permanent invite, does not expire. Replaced the old Mvy5zPA6x link, which
+   * did not match the invite on the mod's own store listing.
    */
-  /* Permanent invite — does not expire. Replaced the old Mvy5zPA6x link, which
-     did not match the one on the mod's own store listing. */
   discord: 'https://discord.gg/UYjC3QTkuV',
   /*
    * The mod repository is deliberately NOT linked from the site. It is public

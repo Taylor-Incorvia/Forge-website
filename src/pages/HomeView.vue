@@ -58,7 +58,7 @@ const CHANGES = [
         </p>
         <!--
           Two CTAs only: start playing, or go find someone to play against.
-          /why-its-different is still reached from the design-thesis section
+          /why-its-different is still reached from the reasoning section
           below and from the header, so it loses nothing by leaving the hero.
         -->
         <div class="hero__cta">
@@ -103,7 +103,7 @@ const CHANGES = [
     <FactionRoller />
     <div class="roller-notes">
       <p class="roller-scale">
-        This roll is real. Same odds as a live game.
+        Above is a real roll from the live game.
         <strong>{{ FACTION_COMBINATIONS.toLocaleString('en-US') }}</strong>
         possible factions. You'll never play the same one twice.
       </p>
@@ -142,7 +142,7 @@ const CHANGES = [
       </AppCard>
     </div>
     <div class="tenets__more">
-      <AppButton to="/why-its-different" variant="ghost">Read the design thesis →</AppButton>
+      <AppButton to="/why-its-different" variant="ghost">Why it works this way →</AppButton>
     </div>
   </PageSection>
 

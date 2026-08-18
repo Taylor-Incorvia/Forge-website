@@ -34,7 +34,7 @@ const TENETS = [
 
 <template>
   <PageHero
-    eyebrow="Design thesis"
+    eyebrow="The reasoning"
     title="Intentionally clashes with standard RTS design"
     lede="Wildcard Arena gives up some player agency and leans into randomness on purpose, the opposite of what competitive RTS usually optimizes for. Here’s why."
   />
