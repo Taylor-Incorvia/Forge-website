@@ -11,6 +11,7 @@ import {
   LINKS,
   DISCORD_INVITE_IS_LIVE,
   COMMUNITY_PAGE_ENABLED,
+  mediaUrl,
 } from '@/data/site'
 import { LATEST_PATCH, formatPatchDate } from '@/data/patches'
 
@@ -88,7 +89,7 @@ const CHANGES = [
           three lines below to hero-battle.mp4 / -poster.jpg / ratio 16/9.
         -->
         <MediaFrame
-          src="/media/hero-box-art-fight.mp4"
+          :src="mediaUrl('hero-box-art-fight.mp4')"
           poster="/media/hero-box-art-fight-poster.jpg"
           kind="video"
           alt="A Wildcard Arena army fight: Psi Storm crackling over a mixed force of Terran mechs and Zerg units, with a Thor and a Terran base to the right and the Your Faction panel open at the left."

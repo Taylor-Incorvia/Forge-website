@@ -584,46 +584,63 @@ for free and hands someone a reason to be invested. Better than any translation 
 
 ## 7. Serve video from a URL instead of committing it
 
-Right now every clip lives in `public/media`, gets committed, and ships in the
-deploy. That works and GitHub Pages serves it fine — but binaries in git are
-permanent, and clips get re-cut.
+**Decided: GitHub Releases.** No bucket, no new account, and release assets are
+**not stored in git history** — which is the actual problem, not bandwidth.
 
-**Already true after two days of this:** ~6.5 MB of media blobs in history, from
-10 blobs, for 4 files that are currently ~3.7 MB on disk. Every re-encode adds a
-full copy forever. Re-cutting the hero three times is what that looks like.
+### The problem, measured
 
-### When it actually matters
+~6.5 MB of media blobs in git history from 10 blobs, for files currently ~5.7 MB
+on disk. Every re-cut leaves a permanent copy. The hero alone has been encoded
+four times.
 
-Not yet. It matters when either:
+**Bandwidth is not the trigger.** Pages' soft limit is ~100 GB/month and the site
+is ~1.5 MB per engaged visitor, so roughly 66,000 visitors/month before it is a
+question. A strong Reddit run will not get near that. Ignore bandwidth; the
+reason to move is history.
 
-- you iterate on clips enough that history dwarfs the source (a clone gets slow), or
-- you post the Reddit series and the traffic makes Pages bandwidth a question.
+### The code is already ready
 
-GitHub Pages is a soft ~100 GB/month. A 1 MB autoplaying hero is ~1 GB per 1,000
-visitors, so a good Reddit run puts that in play sooner than you would think.
+`MEDIA_BASE` and `mediaUrl()` in `site.ts`. Empty string serves from
+`public/media` (today). Set it and every video moves at once:
 
-### Options, cheapest first
+```ts
+export const MEDIA_BASE = 'https://github.com/<user>/<repo>/releases/download/media-v1'
+```
 
-1. **Do nothing.** Genuinely fine until one of the two triggers above fires.
-2. **Keep committing, but stop re-committing.** Encode to a scratch dir, only
-   copy into `public/media` when a cut is final. Most of that 6.5 MB is drafts.
-3. **External host + URL** — Cloudflare R2 or Bunny, referenced absolutely in
-   `MediaFrame src`. Repo stays text-only, bandwidth leaves Pages entirely.
-   Costs a few dollars a month and a second thing to keep alive.
-4. **Git LFS.** Keeps one URL and one workflow, but GitHub Pages does **not**
-   resolve LFS pointers on deploy — the build would ship the pointer file, not
-   the video. Only viable if CI fetches LFS before building. Mentioned because
-   it is the obvious idea and it quietly breaks.
+Only video routes through it. Posters and screenshots stay local on purpose:
+they are small, the poster is the first paint, and a cross-origin poster is the
+one that stalls.
 
-### If you go external
+### Order of operations, so the site is never broken
 
-- `MediaFrame` needs no change; `src` is already just a string.
-- Keep the poster local. It is small, it is the first paint, and a cross-origin
-  poster is the one that will stall.
-- The site has no CSP today. Adding one later means allowlisting the media host.
-- Absolute URLs mean the site breaks if the host lapses. Local files never do.
+1. Create the repo and push (§1 — this gates everything).
+2. `gh release create media-v1 public/media/*.mp4` (the `gh` CLI is **not**
+   installed on this machine; the web UI works fine too).
+3. Set `MEDIA_BASE`, rebuild, confirm both videos load.
+4. **Only then** delete the mp4s from `public/media` and add
+   `public/media/*.mp4` to `.gitignore`.
 
----
+Doing 4 before 3 ships a site with broken video.
+
+### Rejected
+
+- **Git LFS** — the obvious answer, and it silently breaks: GitHub Pages does not
+  resolve LFS pointers at deploy, so the build ships the pointer file instead of
+  the video. Only viable if CI fetches LFS first.
+- **YouTube / Vimeo** — an iframe with branding, controls and cookie
+  implications, and it cannot be cleanly muted-autoplay-looped as a background.
+  Fine for a future "watch gameplay" section, wrong for the hero.
+- **Own S3/R2 bucket** — works, but it is the setup you did not want, plus a
+  second thing to keep alive and a bill.
+- **jsDelivr from a separate media repo** — decent runner-up, nicer URLs, real
+  CDN, no account. But the files still live in git somewhere, so it moves the
+  bloat rather than removing it.
+
+### Free interim, costs nothing to adopt now
+
+Encode to a scratch directory and only copy into `public/media` when a cut is
+final. Most of that 6.5 MB is drafts that were never on the site for more than
+an hour.
 
 ## Rules that still hold
 

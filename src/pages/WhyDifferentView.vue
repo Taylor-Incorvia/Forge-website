@@ -5,6 +5,7 @@ import AppCard from '@/components/ui/AppCard.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import MediaFrame from '@/components/ui/MediaFrame.vue'
 import { useMeta } from '@/composables/useMeta'
+import { mediaUrl } from '@/data/site'
 
 useMeta({
   title: 'Why It’s Different',
@@ -75,7 +76,7 @@ const TENETS = [
         frame__media is object-fit: cover and a preset would crop the fight.
       -->
       <MediaFrame
-        src="/media/upgrade-in-a-fight.mp4"
+        :src="mediaUrl('upgrade-in-a-fight.mp4')"
         poster="/media/upgrade-in-a-fight-poster.jpg"
         kind="video"
         alt="Zealots with rolled Raptor Charge leaping up a cliff into a Terran position, fighting Siege Tanks and Marines while the Your Faction panel stays open at the left."

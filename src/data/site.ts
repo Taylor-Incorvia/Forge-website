@@ -23,7 +23,7 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-18 · rev 104'
+export const BUILD_STAMP = '2026-08-18 · rev 105'
 
 export const LINKS = {
   /**
@@ -55,6 +55,34 @@ export const DISCORD_INVITE_IS_LIVE = true
  * CommunityView.vue is deliberately left in place; nothing to rebuild later.
  */
 export const COMMUNITY_PAGE_ENABLED = false
+
+/**
+ * Where video is served from.
+ *
+ * Empty string = from this site, i.e. `public/media`. That is correct today
+ * and keeps the site self-contained.
+ *
+ * Set it to a GitHub Release asset base to serve video from outside the repo,
+ * e.g. 'https://github.com/<user>/<repo>/releases/download/media-v1'. Release
+ * assets are NOT stored in git history, which is the whole point: re-cutting a
+ * clip currently leaves a permanent copy behind (about 6.5 MB so far).
+ *
+ * Only VIDEO routes through this. Posters and screenshots stay local — they are
+ * small, the poster is the first paint, and a cross-origin poster is the one
+ * that stalls.
+ *
+ * Order of operations when you flip it, so the site is never broken:
+ *   1. create the repo and push (TODO §1)
+ *   2. upload the .mp4 files as assets on a release
+ *   3. set this constant, rebuild, confirm the videos load
+ *   4. only then delete them from public/media and gitignore `public/media/*.mp4`
+ */
+export const MEDIA_BASE = ''
+
+/** Resolves a file in public/media, or on MEDIA_BASE when one is configured. */
+export function mediaUrl(file: string): string {
+  return MEDIA_BASE ? `${MEDIA_BASE}/${file}` : `/media/${file}`
+}
 
 export const RACE_LABEL: Record<'terran' | 'protoss' | 'zerg', string> = {
   terran: 'Terran',
