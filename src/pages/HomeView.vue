@@ -81,13 +81,19 @@ const CHANGES = [
       </div>
 
       <div class="hero__media">
+        <!--
+          TRYING OUT clip 6 (box-art army fight), seconds 23-31, bottom-cropped
+          to drop the command card, minimap, facecam and keypress overlay.
+          hero-battle.mp4 is still in public/media — to go back, restore the
+          three lines below to hero-battle.mp4 / -poster.jpg / ratio 16/9.
+        -->
         <MediaFrame
-          src="/media/hero-battle.mp4"
-          poster="/media/hero-battle-poster.jpg"
+          src="/media/hero-box-art-fight.mp4"
+          poster="/media/hero-box-art-fight-poster.jpg"
           kind="video"
-          alt="A Wildcard Arena battle: Protoss Immortals and Stalkers fighting alongside Terran units against a Zerg army."
+          alt="A Wildcard Arena army fight: Psi Storm crackling over a mixed force of Terran mechs and Zerg units, with a Thor and a Terran base to the right and the Your Faction panel open at the left."
           label="Gameplay clip"
-          ratio="16/9"
+          ratio="1024/390"
           priority
         />
       </div>
