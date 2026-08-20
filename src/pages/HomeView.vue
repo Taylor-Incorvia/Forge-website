@@ -84,10 +84,12 @@ const CHANGES = [
       <div class="hero__media">
         <!--
           Taylor's own cut (hero-box-art-fight.mp4, 1490x694), seconds 16-28,
-          with 449px taken off the LEFT at his suggestion — no action happens
-          there, and narrowing the clip to 3:2 buys height at a fixed column
-          width. Encoded at the native 1041x694 crop: upscaling to 1248 wide
-          tripled the file size and added no detail.
+          windowed to 1040x694 at x=130 — a 3:2 crop centred on the fight,
+          which spans roughly x=300..1000 of the 1490 source. Narrowing to 3:2
+          buys height at a fixed column width; centring it stops units being
+          clipped at the left edge while dropping the static base terrain on the
+          right. Encoded at the native crop size: upscaling to 1248 wide tripled
+          the file size and added no detail.
           hero-battle.mp4 is still in public/media if you want the old hero.
         -->
         <MediaFrame
@@ -96,7 +98,7 @@ const CHANGES = [
           kind="video"
           alt="A Wildcard Arena battle on open ground: two mixed-race armies trading fire, with beam weapons firing through the middle of the engagement."
           label="Gameplay clip"
-          ratio="3/2"
+          ratio="1040/694"
           priority
         />
       </div>
