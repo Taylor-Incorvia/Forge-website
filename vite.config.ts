@@ -55,14 +55,26 @@ export default defineConfig({
     },
   },
   /**
+   * PORTS
+   *   dev     3000  — what you type. strictPort makes it FAIL when 3000 is
+   *                   busy rather than quietly landing on 3001; the point is
+   *                   that the address never surprises you.
+   *   preview 4173  — vite's default, set explicitly in scripts/rebuild.ps1.
+   *                   A long-running background service behind the Cloudflare
+   *                   tunnel, not something you type. The tunnel is bound to
+   *                   that port, so moving it would burn the public URL.
+   *
+   * ALLOWED HOSTS
    * Vite rejects requests whose Host header it does not recognise, which
    * otherwise breaks any tunnel with "Blocked request. This host is not
    * allowed." A leading dot allows the domain and all its subdomains.
    *
-   * These only affect `vite dev` and `vite preview` on a local machine — the
-   * deployed site is static files and has no dev server at all.
+   * Both blocks affect only `vite dev` and `vite preview` on a local machine —
+   * the deployed site is static files and has no server at all.
    */
   server: {
+    port: 3000,
+    strictPort: true,
     allowedHosts: ['.trycloudflare.com', '.ngrok-free.app', '.ngrok.io', '.loca.lt'],
   },
   preview: {

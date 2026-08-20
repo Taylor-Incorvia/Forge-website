@@ -14,7 +14,7 @@ Requires Node 20.19+ (see `.nvmrc` — CI uses Node 24).
 
 ```bash
 npm install
-npm run dev        # dev server at http://localhost:5173
+npm run dev        # dev server at http://localhost:3000 (pinned; fails if busy)
 npm run build      # typecheck, then prerender every route to dist/
 npm run preview    # serve dist/ locally
 npm run typecheck  # vue-tsc only
