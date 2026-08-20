@@ -76,7 +76,7 @@ const FIRST_GAME = [
       <StepList :steps="STEPS" />
       <div class="flow__media">
         <MediaFrame
-          src="/media/select-extension-mod.png"
+          src="/media/select-extension-mod.jpg"
           alt="StarCraft II's Select Extension Mod dialog, reached from Custom then Melee. A search for “wildcard” returns Wildcard Arena, selected, with its store listing on the right and a Create Lobby button below."
           label="The Select Extension Mod screen"
           ratio="2557/1355"

@@ -18,7 +18,7 @@ interface MetaOptions {
  */
 export function useMeta({ title, description, path, index = true }: MetaOptions) {
   const fullTitle =
-    title === SITE.name ? `${SITE.name}: a StarCraft II melee mod` : `${title} · ${SITE.name}`
+    title === SITE.name ? `${SITE.name}: a StarCraft II multiplayer mod` : `${title} · ${SITE.name}`
   const url = path ? `${SITE.url}${path}` : SITE.url
 
   useHead({

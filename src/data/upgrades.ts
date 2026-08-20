@@ -64,6 +64,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Metabolic Boost',
     category: 'mobility',
     cap: 2,
+    description: '+50% move speed. Zerglings only.',
   },
   {
     id: 'stalkerblinkcooldown',
@@ -152,6 +153,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Adrenal Glands',
     category: 'combat',
     cap: 2,
+    description: '+40% attack speed. Zerglings only.',
   },
   {
     id: 'RavagerCorrosiveBile',
