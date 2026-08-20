@@ -83,7 +83,7 @@ const CHANGES = [
 
       <div class="hero__media">
         <!--
-          Taylor's own cut (hero-box-art-fight.mp4, 1490x750), seconds 16-28.
+          Taylor’s own cut (hero-box-art-fight.mp4, 1490x694), seconds 16-28.
           The crop is his, not ours — only trimmed, scaled to 1024 and dropped
           to 30fps for the web. hero-battle.mp4 is still in public/media if you
           ever want the original hero back.
@@ -94,7 +94,7 @@ const CHANGES = [
           kind="video"
           alt="A Wildcard Arena battle on open ground: two mixed-race armies trading fire, with beam weapons firing through the middle of the engagement."
           label="Gameplay clip"
-          ratio="1024/516"
+          ratio="1024/476"
           priority
         />
       </div>
