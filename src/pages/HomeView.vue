@@ -83,18 +83,18 @@ const CHANGES = [
 
       <div class="hero__media">
         <!--
-          TRYING OUT clip 6 (box-art army fight), seconds 18-31, bottom-cropped
-          to drop the command card, minimap, facecam and keypress overlay.
-          hero-battle.mp4 is still in public/media — to go back, restore the
-          three lines below to hero-battle.mp4 / -poster.jpg / ratio 16/9.
+          Taylor's own cut (hero-box-art-fight.mp4, 1490x750), seconds 16-28.
+          The crop is his, not ours — only trimmed, scaled to 1024 and dropped
+          to 30fps for the web. hero-battle.mp4 is still in public/media if you
+          ever want the original hero back.
         -->
         <MediaFrame
           :src="mediaUrl('hero-box-art-fight.mp4')"
           poster="/media/hero-box-art-fight-poster.jpg"
           kind="video"
-          alt="A Wildcard Arena army fight: Psi Storm crackling over a mixed force of Terran mechs and Zerg units, with a Thor and a Terran base to the right and the Your Faction panel open at the left."
+          alt="A Wildcard Arena battle on open ground: two mixed-race armies trading fire, with beam weapons firing through the middle of the engagement."
           label="Gameplay clip"
-          ratio="1024/390"
+          ratio="1024/516"
           priority
         />
       </div>
