@@ -83,10 +83,12 @@ const CHANGES = [
 
       <div class="hero__media">
         <!--
-          Taylor’s own cut (hero-box-art-fight.mp4, 1490x694), seconds 16-28.
-          The crop is his, not ours — only trimmed, scaled to 1024 and dropped
-          to 30fps for the web. hero-battle.mp4 is still in public/media if you
-          ever want the original hero back.
+          Taylor's own cut (hero-box-art-fight.mp4, 1490x694), seconds 16-28,
+          with 449px taken off the LEFT at his suggestion — no action happens
+          there, and narrowing the clip to 3:2 buys height at a fixed column
+          width. Encoded at the native 1041x694 crop: upscaling to 1248 wide
+          tripled the file size and added no detail.
+          hero-battle.mp4 is still in public/media if you want the old hero.
         -->
         <MediaFrame
           :src="mediaUrl('hero-box-art-fight.mp4')"
@@ -94,7 +96,7 @@ const CHANGES = [
           kind="video"
           alt="A Wildcard Arena battle on open ground: two mixed-race armies trading fire, with beam weapons firing through the middle of the engagement."
           label="Gameplay clip"
-          ratio="1024/476"
+          ratio="3/2"
           priority
         />
       </div>
@@ -423,9 +425,15 @@ const CHANGES = [
 
 /* ── Breakpoints ──────────────────────────────────────────── */
 @media (min-width: 60rem) {
+  /*
+   * Weighted toward the media, not the copy. The lede is capped at 54ch and the
+   * title wraps anyway, so the copy column had slack it was not using while the
+   * video rendered about 532px wide. The narrower gap buys another 16px.
+   * Copy still clears 54ch, so nothing reflows awkwardly.
+   */
   .hero__inner {
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: var(--space-16);
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: var(--space-12);
   }
   .start {
     grid-template-columns: 1fr 1fr;
