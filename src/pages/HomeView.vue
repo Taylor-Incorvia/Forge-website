@@ -160,9 +160,9 @@ const CHANGES = [
       </ol>
       <div class="start__aside">
         <p class="prose">
-          Melee and Arcade are both tabs under Custom. Wildcard Arena is a melee mod, so it is on
-          the Melee tab. It loads with the map. No separate download, no client to install, and
-          nothing to buy, since StarCraft II multiplayer is free.
+          Wildcard Arena is a melee mod, so it is on the Melee tab. It loads with the map. No
+          separate download, no client to install, and nothing to buy, since StarCraft II
+          multiplayer is free.
         </p>
         <p class="prose">
           Playing alone,
