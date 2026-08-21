@@ -5,14 +5,7 @@ import MediaFrame from '@/components/ui/MediaFrame.vue'
 import PageSection from '@/components/layout/PageSection.vue'
 import FactionRoller from '@/components/game/FactionRoller.vue'
 import { useMeta } from '@/composables/useMeta'
-import {
-  SITE,
-  FACTION_COMBINATIONS,
-  LINKS,
-  DISCORD_INVITE_IS_LIVE,
-  COMMUNITY_PAGE_ENABLED,
-  mediaUrl,
-} from '@/data/site'
+import { SITE, FACTION_COMBINATIONS, LINKS, DISCORD_INVITE_IS_LIVE, mediaUrl } from '@/data/site'
 import { LATEST_PATCH, formatPatchDate } from '@/data/patches'
 
 useMeta({
@@ -28,8 +21,8 @@ useMeta({
  * which is what someone deciding whether to try it actually needs.
  *
  * Strictly what CHANGES. "You still macro like standard StarCraft" was a third
- * card here and did not belong: it names what stays the same. It now closes the
- * Curated section, which is the reassurance beat.
+ * card here and did not belong: it names what stays the same. It now sits under
+ * the roller, with the rest of the constraint story.
  */
 const CHANGES = [
   {
@@ -73,12 +66,6 @@ const CHANGES = [
             Join the Discord
           </AppButton>
         </div>
-        <!--
-          "Melee mod" is kept, but demoted to here: it is the word you need in
-          the lobby, not the word that explains what this is. The lede defines
-          the thing in language that needs no glossary; this teaches the term
-          next to the instruction where it becomes useful.
-        -->
       </div>
 
       <div class="hero__media">
@@ -105,12 +92,13 @@ const CHANGES = [
     </div>
   </section>
 
-  <!-- ── The mechanic, shown rather than described ──────────── -->
-  <PageSection
-    tone="sunken"
-    eyebrow="The hand you're dealt"
-    title="This is one faction. Roll again and you get a different one."
-  >
+  <!--
+    The roller and the constraint story are ONE block. They used to be two
+    sections, two eyebrows and two CTAs answering the same question — is this
+    real strategy or is it chaos — so the page argued it twice, with scaffolding
+    around each half.
+  -->
+  <PageSection tone="sunken" title="This is one faction. Roll again and you get a different one.">
     <FactionRoller />
     <div class="roller-notes">
       <p class="roller-scale">
@@ -118,8 +106,18 @@ const CHANGES = [
         <strong>{{ FACTION_COMBINATIONS.toLocaleString('en-US') }}</strong>
         possible factions. You'll never play the same one twice.
       </p>
+      <p class="roller-scale">
+        Rolls are not unrestricted. Units and upgrades are pooled to prevent both useless and
+        oppressive factions, so the faction is random but winning is not: macro, micro and reading
+        your opponent still decide every game.
+        <RouterLink to="/upgrades">See how upgrades are pooled</RouterLink>.
+      </p>
     </div>
 
+    <!--
+      Corroboration, not repetition. The roller is a website widget; this is the
+      same thing inside the game, which is the question a sceptic actually has.
+    -->
     <div class="panel">
       <MediaFrame
         src="/media/your-faction-panel.png"
@@ -130,19 +128,8 @@ const CHANGES = [
     </div>
   </PageSection>
 
-  <!-- ── Randomness is constrained, not arbitrary ───────────── -->
-  <PageSection
-    eyebrow="Variety inside constraints"
-    title="Curated, not chaos"
-    lede="The randomness is rigged for fairness to prevent both useless and oppressive rolls. The faction is random. Winning is not: macro, micro and reading your opponent still decide every game."
-  >
-    <AppButton to="/upgrades" variant="ghost">See how upgrades are pooled →</AppButton>
-  </PageSection>
-
   <!-- ── What changes for the player ────────────────────────── -->
   <PageSection
-    tone="sunken"
-    eyebrow="What changes"
     title="What if StarCraft didn’t have fixed matchups?"
     lede="StarCraft II strategy has been thoroughly explored through the lenses of Terran, Protoss and Zerg. Wildcard Arena takes those lenses away."
   >
@@ -157,8 +144,12 @@ const CHANGES = [
     </div>
   </PageSection>
 
-  <!-- ── Get started ───────────────────────────────────────── -->
-  <PageSection eyebrow="Getting in" title="Five clicks from the SC2 main menu">
+  <!--
+    One closing block instead of three. "Getting in", "Solo, co-op, or versus"
+    and the patch date were separate sections; they are all answers to "how do I
+    actually start", and /how-to-play carries the long versions.
+  -->
+  <PageSection tone="sunken" title="Five clicks from the SC2 main menu">
     <div class="start">
       <ol class="start__steps">
         <li><strong>Custom</strong> → <strong>Melee</strong> (not Arcade)</li>
@@ -173,63 +164,28 @@ const CHANGES = [
           loads with the map. No separate download, no client to install, and nothing to buy, since
           StarCraft II multiplayer is free.
         </p>
-        <AppButton to="/how-to-play">See the full walkthrough</AppButton>
+        <p class="prose">
+          Playing alone, survival maps work. A normal map with a computer opponent does not, because
+          the melee AI has no idea what to do with a rolled faction. For versus, Discord is the
+          fastest way to find someone.
+        </p>
+        <div class="start__cta">
+          <AppButton to="/how-to-play">See the full walkthrough</AppButton>
+          <AppButton v-if="DISCORD_INVITE_IS_LIVE" :href="LINKS.discord" variant="secondary">
+            Join the Discord
+          </AppButton>
+        </div>
       </div>
     </div>
-  </PageSection>
 
-  <!--
-    Deliberately just a dated line. The balance detail belongs on /patch-notes;
-    what the homepage needs from it is the one thing a stranger actually wonders
-    about a mod, which is whether it is still alive. A date answers that.
-  -->
-  <PageSection tone="sunken" eyebrow="Still in development" title="Latest patch">
-    <!-- Patches only sometimes carry a version headline, so the date is what is
-         always available and it is the part that answers "is this alive?". -->
-    <p v-if="LATEST_PATCH" class="lede patch__line">
-      <template v-if="LATEST_PATCH.version">
-        <strong>{{ LATEST_PATCH.version }}</strong> shipped
-        {{ formatPatchDate(LATEST_PATCH.date) }}.
-      </template>
-      <template v-else>
-        Shipped <strong>{{ formatPatchDate(LATEST_PATCH.date) }}</strong
-        >.
-      </template>
+    <!-- The only thing the homepage needs from patch notes: proof it is alive. -->
+    <p v-if="LATEST_PATCH" class="start__patch">
+      Still in development.
+      <template v-if="LATEST_PATCH.version">{{ LATEST_PATCH.version }} shipped</template>
+      <template v-else>Last patch shipped</template>
+      {{ formatPatchDate(LATEST_PATCH.date) }}.
+      <RouterLink to="/patch-notes">Read the notes</RouterLink>.
     </p>
-    <div class="patch__more">
-      <AppButton to="/patch-notes" variant="ghost">Read the patch notes →</AppButton>
-    </div>
-  </PageSection>
-
-  <!-- ── Getting a game ────────────────────────────────────── -->
-  <PageSection eyebrow="Getting a game" title="Solo, co-op, or versus">
-    <div class="ways">
-      <AppCard padding="lg" as="article" class="way way--solo">
-        <p class="eyebrow">On your own</p>
-        <h3 class="way__title">Solo and co-op</h3>
-        <p class="way__body">
-          Survival maps work, because their attack waves are scripted. A normal map with a computer
-          opponent does not. The melee AI has no idea what to do with a rolled faction.
-        </p>
-        <AppButton to="/how-to-play#survival" variant="secondary">
-          How to set it up on a survival map
-        </AppButton>
-      </AppCard>
-
-      <AppCard padding="lg" as="article" class="way way--versus">
-        <p class="eyebrow">Against someone</p>
-        <h3 class="way__title">1v1 up to 4v4</h3>
-        <p class="way__body">
-          The mod is built for versus play, and that is where reading your hand against a thinking
-          opponent actually matters. Discord is the fastest way to find a game, and where patches
-          and anything new get announced first.
-        </p>
-        <AppButton v-if="DISCORD_INVITE_IS_LIVE" :href="LINKS.discord">Join the Discord</AppButton>
-        <AppButton v-else-if="COMMUNITY_PAGE_ENABLED" to="/community" variant="secondary">
-          Community
-        </AppButton>
-      </AppCard>
-    </div>
   </PageSection>
 </template>
 
@@ -285,13 +241,6 @@ const CHANGES = [
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-2);
-}
-
-.hero__small {
-  max-width: 52ch;
-  font-size: var(--fs-sm);
-  color: var(--c-text-muted);
-  line-height: var(--lh-relaxed);
 }
 
 .roller-scale {
@@ -375,6 +324,21 @@ const CHANGES = [
   color: var(--c-text-muted);
 }
 
+.start__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* A footnote, not a section. Small enough that it never reads as a CTA. */
+.start__patch {
+  margin-top: var(--space-10);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--c-border);
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+}
+
 .start__aside {
   display: flex;
   flex-direction: column;
@@ -383,48 +347,7 @@ const CHANGES = [
 }
 
 /* ── Patch ────────────────────────────────────────────────── */
-.patch__line strong {
-  color: var(--c-text);
-  font-weight: var(--fw-medium);
-}
-
-.patch__more {
-  margin-top: var(--space-4);
-}
-
 /* ── Getting a game ───────────────────────────────────────── */
-.ways {
-  display: grid;
-  gap: var(--space-4);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-}
-
-.way {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
-
-/* A quiet left edge distinguishes the two routes without color-coding them. */
-.way--solo {
-  border-left: 2px solid var(--c-border-strong);
-}
-
-.way--versus {
-  border-left: 2px solid var(--c-accent);
-}
-
-.way__title {
-  font-size: var(--fs-xl);
-}
-
-.way__body {
-  flex: 1;
-  color: var(--c-text-secondary);
-  line-height: var(--lh-relaxed);
-}
-
 /* ── Breakpoints ──────────────────────────────────────────── */
 @media (min-width: 60rem) {
   /*
