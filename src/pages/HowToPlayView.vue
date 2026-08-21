@@ -19,7 +19,7 @@ const STEPS = [
   {
     title: 'Open **Custom**, then **Melee**',
     detail:
-      'Not Arcade. Wildcard Arena is a melee mod, so it lives under Custom games alongside the standard 1v1 and team modes.',
+      'Melee and Arcade are both tabs under Custom, so getting this far is not enough. You want the Melee tab. Wildcard Arena is a melee mod, and it sits alongside the normal unranked 1v1 and team games.',
   },
   {
     title: 'Select any melee map',
