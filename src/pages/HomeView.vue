@@ -165,9 +165,10 @@ const CHANGES = [
           StarCraft II multiplayer is free.
         </p>
         <p class="prose">
-          Playing alone, survival maps work. A normal map with a computer opponent does not, because
-          the melee AI has no idea what to do with a rolled faction. For versus, Discord is the
-          fastest way to find someone.
+          Playing alone,
+          <RouterLink to="/how-to-play#survival">survival maps work</RouterLink>. A normal map with
+          a computer opponent does not, because the melee AI has no idea what to do with a rolled
+          faction. For versus, Discord is the fastest way to find someone.
         </p>
         <div class="start__cta">
           <AppButton to="/how-to-play">See the full walkthrough</AppButton>
