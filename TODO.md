@@ -1,8 +1,8 @@
 # TODO
 
-Written 2026-08-06 at rev 61, amended through **rev 94**.
+Written 2026-08-06 at rev 61, amended through **rev 115**.
 
-Current state: 46 routes prerender, typecheck clean, **26 commits on `main`, nothing pushed**,
+Current state: 45 routes prerender, typecheck clean, **47 commits on `main`, nothing pushed**,
 nothing deployed. Local preview lives at `:4173` behind a Cloudflare quick tunnel (see README).
 Those two detached processes will be long dead by the time you read this; rerun
 `scripts/serve-public.ps1`.
@@ -101,20 +101,36 @@ axis, since React is the frontend you use daily.
 
 ---
 
-## 1. Blockers before it can go live
+## 1. Ship it — three things left, all outside the code
 
-- [ ] **First commit and push.** `git init` is done and ~57 files are staged, but nothing has ever
-      been committed. Create the GitHub repo, push `main`.
-- [ ] **GitHub Pages setup.** Settings → Pages → Source: GitHub Actions. The workflow at
-      `.github/workflows/deploy.yml` already typechecks, builds and publishes `dist/`.
-- [ ] **DNS for wildcardarena.com.** Four A records to GitHub's IPs plus a `www` CNAME. The exact
-      table is in README under Deployment. `public/CNAME` already holds the domain. Turn on
-      **Enforce HTTPS** once the cert issues.
-- [ ] **`og:image`.** There is none. Every link pasted into Discord or Reddit renders as a bare
-      text card, which for a mod that spreads by word of mouth is the worst place to be cheap.
-      One 1200x630 PNG in `public/` plus the meta tag in `useMeta.ts`.
-- [ ] **Two blank upgrade descriptions:** Adrenal Glands and Metabolic Boost in `upgrades.ts`.
-      Both are flagged `VERIFY IN-GAME` in the audit. Load a game and read the tooltips.
+The site is done. Content, copy, media, meta and accessibility all audited clean
+at rev 115. What remains is wiring, and it needs an hour of your attention
+rather than another edit.
+
+- [ ] **Create the GitHub repo and push.** 47 commits sit on `main` with **no
+      remote**, in a OneDrive folder. This is the only real risk left.
+- [ ] **GitHub Pages.** Settings → Pages → Source: **GitHub Actions**. The
+      workflow at `.github/workflows/deploy.yml` already typechecks, builds and
+      publishes `dist/`. Nothing to write.
+- [ ] **DNS for wildcardarena.com.** Four A records to GitHub's IPs plus a `www`
+      CNAME — the table is in README under Deployment. `public/CNAME` already
+      holds the domain. Turn on **Enforce HTTPS** once the cert issues.
+
+### Done, do not redo
+
+- ~~og:image~~ — 1200x630 gameplay still at `public/og.jpg`, absolute URL, on
+  all 46 pages. It will look broken until DNS resolves; that is expected.
+- ~~Two blank upgrade descriptions~~ — Metabolic Boost and Adrenal Glands,
+  both Zergling-only, verified against `UNIT_POOLS`.
+- ~~Desktop review~~ — done, and it held up.
+- ~~Empty media placeholders~~ — zero remain.
+
+### Right after DNS goes live
+
+Discord and Reddit **cache link previews hard**. If you paste the URL before the
+image resolves, the broken card sticks. Discord clears in roughly a day; on
+Reddit, append `?1` while testing. Check one link before starting the clip
+series.
 
 ---
 
