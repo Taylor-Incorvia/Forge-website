@@ -433,6 +433,17 @@ If you go with a route, the mechanical checklist is short:
   do. The footer is the better home for the link.
 - `useMeta` call in the page, same shape as every other view
 
+### Naming: "Leap" vs "Raptor Charge"
+
+The 2026-05-10 patch shipped this upgrade to Discord as **Leap**; the site and the
+mod both call it **Raptor Charge** (internal id `HotSRaptorCharge2`). Same
+ability. The patch note was normalised to Raptor Charge for launch so a reader
+clicking through from the changelog actually finds it on /upgrades.
+
+Taylor's preference is **Leap everywhere** — it is the better name and it is what
+the community heard first. That is a rename across `upgrades.ts`, the patch note,
+and the mod's own GameStrings, so it was deferred rather than done on ship day.
+
 ### Loose copy ends
 
 - `WhyDifferentView` lost its "How to play" CTA during the edits. It currently dead-ends.

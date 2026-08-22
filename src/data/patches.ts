@@ -186,12 +186,12 @@ export const PATCHES: Patch[] = [
   {
     date: '2026-05-10',
     summary:
-      'A new Leap upgrade, and a major pass over the unit pools: Stalkers move to the Factory and start with Blink, Lurkers move to Factory slot 2, and Barracks slot 1 gets cleaned out.',
+      'A new Raptor Charge upgrade, and a major pass over the unit pools: Stalkers move to the Factory and start with Blink, Lurkers move to Factory slot 2, and Barracks slot 1 gets cleaned out.',
     sections: [
       {
-        title: 'New Upgrade — Leap',
+        title: 'New Upgrade — Raptor Charge',
         items: [
-          'Units with Leap leap directly to their target.',
+          'Units with Raptor Charge leap directly to their target.',
           'They hop up and down cliffs, similar to Reapers.',
           'Yes, Ultralisks can hop cliffs. Yes, they make a thud.',
         ],
@@ -202,7 +202,7 @@ export const PATCHES: Patch[] = [
           'Removed: Zergling range upgrade — it’s bad. Zealot range upgrade. Zergling Charge.',
           'Zerglings now use the standard Zergling movement speed upgrade instead of Charge.',
           'Zealot Charge now grants both the standard passive movement speed increase and the active Charge ability.',
-          'Added: Adrenal Glands, Leap.',
+          'Added: Adrenal Glands, Raptor Charge.',
         ],
       },
       {
