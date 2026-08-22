@@ -183,6 +183,175 @@ export const PATCHES: Patch[] = [
       },
     ],
   },
+  {
+    date: '2026-05-10',
+    summary:
+      'A new Leap upgrade, and a major pass over the unit pools: Stalkers move to the Factory and start with Blink, Lurkers move to Factory slot 2, and Barracks slot 1 gets cleaned out.',
+    sections: [
+      {
+        title: 'New Upgrade — Leap',
+        items: [
+          'Units with Leap leap directly to their target.',
+          'They hop up and down cliffs, similar to Reapers.',
+          'Yes, Ultralisks can hop cliffs. Yes, they make a thud.',
+        ],
+      },
+      {
+        title: 'Barracks Slot 1',
+        items: [
+          'Removed: Zergling range upgrade — it’s bad. Zealot range upgrade. Zergling Charge.',
+          'Zerglings now use the standard Zergling movement speed upgrade instead of Charge.',
+          'Zealot Charge now grants both the standard passive movement speed increase and the active Charge ability.',
+          'Added: Adrenal Glands, Leap.',
+        ],
+      },
+      {
+        title: 'Barracks Slot 2',
+        items: [
+          'Removed: Stalker, War Pig.',
+          'Marine added at 50 minerals / 10 gas.',
+          'Hydralisk cost adjusted to 80 minerals / 30 gas.',
+        ],
+      },
+      {
+        title: 'Barracks Slot 4',
+        items: ['Removed: Lurker.', 'Added: Ghost.'],
+      },
+      {
+        title: 'Factory Slot 1',
+        items: [
+          'Removed: Roach. Added: Stalker.',
+          '**Stalkers now start with Blink.**',
+          'Added Stalker-specific Blink upgrades: reduced Blink cooldown, and increased Blink range.',
+        ],
+      },
+      {
+        title: 'Factory Slot 2',
+        items: ['Added: Archon, Diamondback, Lurker, Goliath.'],
+      },
+      {
+        title: 'Lurker Changes',
+        items: [
+          'Lurker moved from Barracks slot 4 to Factory slot 2.',
+          'Lurker range upgrade added to the Lurker upgrade pool.',
+          'Lurker speed upgrade now also grants Adaptive Talons.',
+        ],
+      },
+      {
+        title: 'Siege Tank Changes',
+        items: ['Siege Tank speed upgrade now also improves siege and unsiege speed.'],
+      },
+      {
+        title: 'Starport Slot 2',
+        items: ['Added: Void Ray.'],
+      },
+      {
+        title: 'Upgrade Pool Cleanup',
+        items: [
+          'KD-8 Charge / Reaper Grenade removed from the relevant upgrade pools — it’s lame.',
+        ],
+      },
+    ],
+  },
+  {
+    date: '2026-04-23',
+    summary: 'Stasis leaves the upgrade pool, and the Roach goes back to stock health.',
+    sections: [
+      {
+        title: 'Balance',
+        items: [
+          'Stasis has been removed from the upgrade pool.',
+          'Roach health restored to normal StarCraft II Roach HP, increased from 125 to 145.',
+        ],
+      },
+    ],
+  },
+  {
+    date: '2026-04-19',
+    summary: 'A duplicate-upgrade collision could block research outright.',
+    sections: [
+      {
+        title: 'Bug Fixes',
+        items: [
+          'Fixed an issue where duplicate upgrade effects across structures could block research. In some games, if Ghost Academy slot 1 and Armory slot 1 both rolled a speed upgrade, completing the Ghost Academy upgrade could prevent the Armory upgrade from being started afterward.',
+        ],
+      },
+    ],
+  },
+  {
+    date: '2026-04-12',
+    summary:
+      'Upgrade research becomes one-and-done, and duplicate upgrade structures are capped at one each.',
+    sections: [
+      {
+        title: 'Upgrade System Changes',
+        items: [
+          'Prevented players from re-researching the same upgrade after it has already been completed. Since duplicate research never provided any additional effect, completed upgrades now become effectively unavailable by setting their repeat research cost to 999999 minerals and 999999 gas.',
+          'Limited each player to one Engineering Academy, one Armory, and one Fusion Core, to prevent duplicate upgrade structures from creating inconsistent upgrade behaviour.',
+        ],
+      },
+    ],
+  },
+  {
+    date: '2026-03-29',
+    summary:
+      'The Colossus picks up new roll options, KD8 Charge leaves the Warhound and Siege Tank pools, and healing gets much broader.',
+    sections: [
+      {
+        title: 'Bug Fixes',
+        items: ['Fixed an issue where the Colossus could not use Yamato Cannon.'],
+      },
+      {
+        title: 'New Upgrade Options',
+        items: [
+          'Colossus can now roll Tactical Jump.',
+          'Colossus can now roll Disruption Blast.',
+          'Zealots can now roll the range upgrade.',
+        ],
+      },
+      {
+        title: 'Balance Changes',
+        items: ['Warhounds and Siege Tanks can no longer roll KD8 Charge (removed cause lame).'],
+      },
+      {
+        title: 'Ability Changes',
+        items: ['Transfuse now works on nearly all target types.'],
+      },
+      {
+        title: 'Healing Changes',
+        items: ['Medics and Medivacs can now heal any non-structure ground unit.'],
+      },
+    ],
+  },
+  {
+    date: '2026-03-26',
+    summary:
+      'Disruption Blast gets much faster, several units are re-costed, and build times come down across the board.',
+    sections: [
+      {
+        title: 'Bug Fixes',
+        items: ['Fixed an issue where some units could walk through Force Fields.'],
+      },
+      {
+        title: 'Balance Changes',
+        items: [
+          'Tempests can no longer roll Metabolic Boost.',
+          'Disruption Blast wind-up reduced from 4s to 1.5s.',
+          'Disruption Blast stun duration reduced from 7s to 3.5s.',
+          'Warhound cost increased from 150/75 to 175/125.',
+          'War Pig cost increased from 60/20 to 60/30.',
+        ],
+      },
+      {
+        title: 'Economy / Early Game',
+        items: ['Supply Depot build time reduced by 4 seconds.'],
+      },
+      {
+        title: 'Global Changes',
+        items: ['Reduced build times across most units and structures.'],
+      },
+    ],
+  },
 ]
 
 export const PATCHES_BY_DATE: ReadonlyMap<string, Patch> = new Map(PATCHES.map((p) => [p.date, p]))
