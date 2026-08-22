@@ -2,20 +2,17 @@
 /**
  * Type-based lockup standing in for a real logo.
  *
- * The glyph is `<?>` — Java's unbounded wildcard, and the closest thing to a
- * literal rendering of the mod's name. Two mirrored chevrons and a question
- * mark, the whole group rotated 8 degrees so it reads as placed rather than
- * constructed. All of the imprecision is in that one rotation: the brackets are
- * mirrored about x=12 and the question mark is centred on (12,12) by
- * construction, not by nudging.
+ * A rotated square split by a short accent line — a dealt card read at small
+ * size. The line deliberately stops 4.27 units short of the diamond's points at
+ * each end. Running it corner to corner made the mark look constructed; leaving
+ * the gap makes it look placed, and it is the only decision in the glyph.
  *
- * The question mark is built from a target height (9 units) rather than scaled,
- * so its stroke stays 1.7 like everything else. Its dot radius is floored at
- * 0.9 so it never ends up thinner than the stroke it belongs to.
+ * A <?> variant (Java's wildcard) was built and rejected: it read well large but
+ * fell apart at 16px, because a question mark is three marks with a detached dot
+ * and the dot is the first thing to go. See git history if you want it back.
  *
  * Inline SVG, so it costs no request and inherits currentColor and --c-accent.
- * public/og.jpg aside, this and public/favicon.svg are the only two places the
- * glyph exists — keep them identical.
+ * Keep this and public/favicon.svg identical.
  */
 withDefaults(defineProps<{ size?: 'sm' | 'md' }>(), { size: 'sm' })
 </script>
@@ -23,33 +20,23 @@ withDefaults(defineProps<{ size?: 'sm' | 'md' }>(), { size: 'sm' })
 <template>
   <span class="brand" :class="`brand--${size}`">
     <svg class="brand__glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <g transform="rotate(8 12 12)">
-        <path
-          d="M8.4 5 3.6 12 8.4 19"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M15.6 5 20.4 12 15.6 19"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M9.77 9.64A2.23 2.23 0 1 1 12 11.87V13.53"
-          fill="none"
-          stroke="var(--c-accent)"
-          stroke-width="1.7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <circle cx="12" cy="15.69" r="0.9" fill="var(--c-accent)" />
-      </g>
+      <rect
+        x="4.6"
+        y="4.6"
+        width="14.8"
+        height="14.8"
+        rx="1.6"
+        transform="rotate(45 12 12)"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+      />
+      <path
+        d="M12 5.8 12 18.2"
+        stroke="var(--c-accent)"
+        stroke-width="1.7"
+        stroke-linecap="round"
+      />
     </svg>
     <span class="brand__text">
       <span class="brand__word">Wildcard</span>

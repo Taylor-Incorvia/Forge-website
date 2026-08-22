@@ -1,12 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
   <rect width="24" height="24" rx="4.5" fill="#0a0c0f"/>
-  <g transform="rotate(8 12 12)">
-    <path d="M8.4 5 3.6 12 8.4 19" fill="none" stroke="#e8ebf0" stroke-width="1.7"
-          stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M15.6 5 20.4 12 15.6 19" fill="none" stroke="#e8ebf0" stroke-width="1.7"
-          stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M9.77 9.64A2.23 2.23 0 1 1 12 11.87V13.53" fill="none" stroke="#22d3ee"
-          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="12" cy="15.69" r="0.9" fill="#22d3ee"/>
-  </g>
+  <rect x="4.6" y="4.6" width="14.8" height="14.8" rx="1.6" transform="rotate(45 12 12)"
+        fill="none" stroke="#e8ebf0" stroke-width="1.7"/>
+  <path d="M12 5.8 12 18.2" stroke="#22d3ee" stroke-width="1.7" stroke-linecap="round"/>
 </svg>
