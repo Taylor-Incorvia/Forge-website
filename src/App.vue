@@ -1,6 +1,25 @@
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
+import { ANALYTICS_BEACON_TOKEN } from '@/data/site'
+
+/*
+ * Site-wide, not per-page: useMeta describes a page, this is chrome. Gated on
+ * the token so that with none set the built HTML contains no script tag at all
+ * rather than an empty or broken one.
+ */
+useHead({
+  script: ANALYTICS_BEACON_TOKEN
+    ? [
+        {
+          src: 'https://static.cloudflareinsights.com/beacon.min.js',
+          defer: true,
+          'data-cf-beacon': JSON.stringify({ token: ANALYTICS_BEACON_TOKEN }),
+        },
+      ]
+    : [],
+})
 </script>
 
 <template>

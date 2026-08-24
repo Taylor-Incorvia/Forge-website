@@ -23,7 +23,7 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-22 · rev 124'
+export const BUILD_STAMP = '2026-08-22 · rev 125'
 
 export const LINKS = {
   /**
@@ -77,6 +77,25 @@ export const COMMUNITY_PAGE_ENABLED = false
  *   3. set this constant, rebuild, confirm the videos load
  *   4. only then delete them from public/media and gitignore `public/media/*.mp4`
  */
+/**
+ * Cloudflare Web Analytics beacon token. Empty = no analytics at all, and the
+ * site makes zero third-party requests — which is the state it shipped in.
+ *
+ * Paste the token from Cloudflare → Analytics & Logs → Web Analytics → your
+ * site, and the beacon appears on every page. Nothing else to change.
+ *
+ * Chosen because it is cookieless and stores nothing on the visitor's device,
+ * so there is no consent banner and nothing for a visitor to notice. It also
+ * does NOT require routing DNS through Cloudflare.
+ *
+ * Caveat worth knowing rather than discovering: static.cloudflareinsights.com
+ * is on some ad-block lists, and this audience runs blockers heavily. Expect to
+ * undercount. Blocked requests fail silently, so nothing breaks.
+ *
+ * Swapping to GoatCounter instead is a two-line change in App.vue.
+ */
+export const ANALYTICS_BEACON_TOKEN = ''
+
 export const MEDIA_BASE = ''
 
 /** Resolves a file in public/media, or on MEDIA_BASE when one is configured. */
