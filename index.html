@@ -6,7 +6,18 @@
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0c0f" />
 
+    <!--
+      SVG first for browsers that support it (sharp at any size). The rasters are
+      not redundant: Google does NOT accept SVG for the favicon it shows beside a
+      search result, and falls back to a generic globe without one. It prefers a
+      square multiple of 48px. favicon.ico covers crawlers that probe the default
+      path without reading these tags at all.
+    -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Self-hosted variable fonts: no third-party request, no FOUT-driven layout shift. -->
     <link
@@ -16,7 +27,13 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <title>Wildcard Arena — a StarCraft II melee mod</title>
   </head>
