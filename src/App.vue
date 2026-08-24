@@ -14,7 +14,7 @@ useHead({
     ? [
         {
           src: 'https://static.cloudflareinsights.com/beacon.min.js',
-          defer: true,
+          type: 'module',
           'data-cf-beacon': JSON.stringify({ token: ANALYTICS_BEACON_TOKEN }),
         },
       ]

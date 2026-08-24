@@ -23,7 +23,7 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-22 · rev 125'
+export const BUILD_STAMP = '2026-08-22 · rev 126'
 
 export const LINKS = {
   /**
@@ -84,6 +84,8 @@ export const COMMUNITY_PAGE_ENABLED = false
  * Paste the token from Cloudflare → Analytics & Logs → Web Analytics → your
  * site, and the beacon appears on every page. Nothing else to change.
  *
+ * The token is not a secret: it ships in the page source by design.
+ *
  * Chosen because it is cookieless and stores nothing on the visitor's device,
  * so there is no consent banner and nothing for a visitor to notice. It also
  * does NOT require routing DNS through Cloudflare.
@@ -94,7 +96,7 @@ export const COMMUNITY_PAGE_ENABLED = false
  *
  * Swapping to GoatCounter instead is a two-line change in App.vue.
  */
-export const ANALYTICS_BEACON_TOKEN = ''
+export const ANALYTICS_BEACON_TOKEN = '06aea48f33be4db286c73f4aa9eed201'
 
 export const MEDIA_BASE = ''
 
