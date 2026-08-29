@@ -23,7 +23,7 @@ export const SITE = {
  * PowerShell's Get-Content/Set-Content — that round-trips UTF-8 through the
  * system ANSI codepage and turns every em-dash and middot into mojibake.
  */
-export const BUILD_STAMP = '2026-08-22 · rev 126'
+export const BUILD_STAMP = '2026-08-22 · rev 127'
 
 export const LINKS = {
   /**

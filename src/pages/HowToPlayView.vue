@@ -43,7 +43,7 @@ const STEPS = [
 const FIRST_GAME = [
   {
     title: 'The race you pick does nothing',
-    body: 'You still choose a race in the lobby, but it has no effect on the game. Your production buildings are stocked with units from all three races regardless of what you picked. If you selected Zerg and got handed Marines and Stalkers, nothing has gone wrong.',
+    body: 'You still choose a race in the lobby, but it has no effect on the game. Your production buildings are stocked with units from all three races regardless of what you picked. If you selected Zerg and got handed Marines and Blink Stalkers, nothing has gone wrong.',
   },
   {
     title: 'Check your faction before you build',

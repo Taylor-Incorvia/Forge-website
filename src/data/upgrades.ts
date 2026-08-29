@@ -78,7 +78,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Stalker Blink Range',
     category: 'mobility',
     cap: 2,
-    description: 'Doubles Blink range and increases the Stalker’s sight range to 16.',
+    description: 'Doubles Blink range and increases the Blink Stalker’s sight range to 16.',
   },
   {
     id: 'LiberatorSiegeSpeed',
@@ -198,7 +198,7 @@ export const UPGRADES: Upgrade[] = [
     name: 'Marine Lifesteal',
     category: 'combat',
     cap: 2,
-    description: 'The Marine’s attacks heal it for 15% of the damage they deal.',
+    description: 'The Marine’s attacks heal it for 40% of the damage they deal.',
   },
 
   // ── Concussive family — 13 units, ONE shared cap of 1 ──────

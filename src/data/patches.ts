@@ -11,6 +11,46 @@ import type { Patch } from './types'
 
 export const PATCHES: Patch[] = [
   {
+    date: '2026-08-29',
+    summary:
+      'Bugfixes and tuning. The Tempest gets more expensive, Marine lifesteal gets much stronger, and the Corsair finally looks like it is firing.',
+    sections: [
+      {
+        title: 'Balance — Nerfs',
+        items: [
+          '**Tempest:** cost **250/175 to 275/200** and build time **+4s** (slower). Tempests on ladder are priced for a world where it has *no* Tempest-specific upgrades, but here it can roll extra range and Tactical Jump, so it was undercosted for its ceiling. Still a premium slot-3 unit, just a bigger commitment now.',
+          '**Blink Stalker:** build time **+3s**.',
+        ],
+      },
+      {
+        title: 'Balance — Buffs',
+        items: [
+          '**Marine — Lifesteal:** healing **15% to 40%** of damage dealt. This should be noticeable.',
+        ],
+      },
+      {
+        title: 'Corsair',
+        items: [
+          '**New attack visual:** a punchy beam with a splash-impact flash, so you can finally *see* the Corsair firing, and see that it hits an area.',
+          'Splash radius increased to **0.82**. Before this change, even two units standing as close as possible to each other would never take splash damage.',
+          'Fixed the **Corsair icons** on the Starport build button and in the "Your Faction" panel. They were showing a placeholder.',
+        ],
+      },
+      {
+        title: 'Naming',
+        items: [
+          'The Stalker is now called **"Blink Stalker"** in the UI. Stalkers have Blink without researching an upgrade, so hopefully this makes that clearer.',
+        ],
+      },
+      {
+        title: 'Bug Fixes',
+        items: [
+          '**Seeker Missile** hotkey was fixed, so it can now be cast if it rolls on a Ghost.',
+        ],
+      },
+    ],
+  },
+  {
     date: '2026-08-16',
     summary:
       'The big one: a "Your Faction" panel so you can actually see the hand you were dealt, live opponent scouting, a 12-worker start, a full caster overhaul, and a pile of cost and build-time tuning.',
