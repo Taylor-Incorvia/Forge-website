@@ -11,6 +11,32 @@ import type { Patch } from './types'
 
 export const PATCHES: Patch[] = [
   {
+    date: '2026-08-31',
+    version: 'v0.7.2',
+    summary:
+      'Research is no longer one-size-fits-all. Every upgrade used to cost 150/150 and take ~87s; now cost and research time reflect how strong the upgrade is.',
+    sections: [
+      {
+        title: 'Research — Cheaper / Faster',
+        items: [
+          '**Concussive Shells:** **50/50, ~43s** (was 150/150, ~87s). Research cost and time now match ladder.',
+          '**Force Field:** **100/100, ~50s** (was 150/150, ~87s). Force Fields are not useful once your opponent has Massive units, so it needed to come out faster to be worth taking.',
+        ],
+      },
+      {
+        title: 'Research — More Expensive / Slower',
+        items: [
+          '**Blink (Barracks slot-1 units):** research time up to **~137s** (was ~87s). It was absurd that Zealots and Zerglings, which can hop walls, escape surrounds and jump on workers, would show up in your base before the 3 minute mark.',
+          '**Yamato Cannon now scales with the unit.** On a **Battlecruiser** it is **150/150, 100s**, because there it is just the unit’s own ability. On every other unit that can roll it (Thor, Ultralisk, Colossus, Tempest) it is **200/200, ~120s**. Yamato is very strong on units cheaper than a Battlecruiser, so it now costs accordingly.',
+        ],
+      },
+      {
+        title: 'Everything else',
+        items: ['Every other upgrade still researches at the standard **150/150, ~87s**.'],
+      },
+    ],
+  },
+  {
     date: '2026-08-29',
     summary:
       'Bugfixes and tuning. The Tempest gets more expensive, Marine lifesteal gets much stronger, and the Corsair finally looks like it is firing.',
