@@ -2,14 +2,17 @@
 /**
  * Type-based lockup standing in for a real logo.
  *
- * A rotated square split by a short accent line — a dealt card read at small
- * size. The line deliberately stops 4.27 units short of the diamond's points at
- * each end. Running it corner to corner made the mark look constructed; leaving
- * the gap makes it look placed, and it is the only decision in the glyph.
+ * A rotated square holding an accent stem and a detached dot. Chosen over the
+ * earlier line-only mark, which is still in git history.
  *
- * A <?> variant (Java's wildcard) was built and rejected: it read well large but
- * fell apart at 16px, because a question mark is three marks with a detached dot
- * and the dot is the first thing to go. See git history if you want it back.
+ * The detached dot is the known weak point, and it is a deliberate trade. At a
+ * true 16px the dot merges into the stem and the glyph collapses back to the
+ * old line-in-a-diamond; measured on a size ladder before shipping. That was
+ * judged acceptable because it degrades to the previous mark rather than to
+ * mush, and because a hiDPI tab renders the favicon at 32 device px, where the
+ * dot separates cleanly. The dot radius is 1.6 rather than a typographically
+ * lighter 1.35 for exactly this reason: 1.35 was mushy at 32px, and 1.85 read
+ * as chunky at 512px.
  *
  * Inline SVG, so it costs no request and inherits currentColor and --c-accent.
  * Keep this and public/favicon.svg identical.
@@ -32,11 +35,12 @@ withDefaults(defineProps<{ size?: 'sm' | 'md' }>(), { size: 'sm' })
         stroke-width="1.7"
       />
       <path
-        d="M12 5.8 12 18.2"
+        d="M12 5.6 12 14.3"
         stroke="var(--c-accent)"
         stroke-width="1.7"
         stroke-linecap="round"
       />
+      <circle cx="12" cy="17.7" r="1.6" fill="var(--c-accent)" />
     </svg>
     <span class="brand__text">
       <span class="brand__word">Wildcard</span>

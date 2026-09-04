@@ -7,12 +7,14 @@
     <meta name="theme-color" content="#0a0c0f" />
 
     <!--
-      SVG first for browsers that support it (sharp at any size). The rasters are
-      not redundant: Google does NOT accept SVG for the favicon it shows beside a
-      search result, and falls back to a generic globe without one. It prefers a
-      square multiple of 48px. favicon.ico covers crawlers that probe the default
-      path without reading these tags at all.
+      favicon.ico FIRST and explicit. Google Search does not support SVG for the
+      icon beside a result, and its docs require an actual link tag rather than
+      probing /favicon.ico at the root, so leading with the SVG left Google with
+      no format it could use and it fell back to a generic globe. Browsers that
+      understand SVG still prefer the typed SVG tag below, so nothing regresses.
+      Google wants a square, ideally a multiple of 48px; the ICO wraps a 48px PNG.
     -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />

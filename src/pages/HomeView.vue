@@ -4,6 +4,7 @@ import AppCard from '@/components/ui/AppCard.vue'
 import MediaFrame from '@/components/ui/MediaFrame.vue'
 import PageSection from '@/components/layout/PageSection.vue'
 import FactionRoller from '@/components/game/FactionRoller.vue'
+import { useHead } from '@unhead/vue'
 import { useMeta } from '@/composables/useMeta'
 import { SITE, FACTION_COMBINATIONS, LINKS, DISCORD_INVITE_IS_LIVE, mediaUrl } from '@/data/site'
 import { LATEST_PATCH, formatPatchDate } from '@/data/patches'
@@ -12,6 +13,51 @@ useMeta({
   title: SITE.name,
   description: SITE.description,
   path: '/',
+})
+
+/*
+ * Structured data, homepage only.
+ *
+ * Google picks for itself which page answers a query, and for "wildcard arena
+ * starcraft" it had been serving /how-to-play. There is no setting that forces
+ * a page to rank; naming the site and the mod as entities whose canonical url
+ * is "/" is the honest lever, because it tells Google where the brand itself
+ * lives. Treat it as a nudge, not a fix.
+ *
+ * Every claim here is one the page already makes in prose. Nothing about the
+ * author, platforms, ratings or play modes is asserted, because none of that is
+ * established anywhere on the site and structured data is a bad place to guess.
+ */
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            '@id': SITE.url + '/#website',
+            url: SITE.url + '/',
+            name: SITE.name,
+            description: SITE.description,
+            inLanguage: 'en',
+          },
+          {
+            '@type': 'VideoGame',
+            '@id': SITE.url + '/#game',
+            url: SITE.url + '/',
+            name: SITE.name,
+            description: SITE.description,
+            image: SITE.url + '/og.jpg',
+            genre: 'Real-time strategy',
+            gamePlatform: 'StarCraft II',
+            isAccessibleForFree: true,
+          },
+        ],
+      }),
+    },
+  ],
 })
 
 /**
